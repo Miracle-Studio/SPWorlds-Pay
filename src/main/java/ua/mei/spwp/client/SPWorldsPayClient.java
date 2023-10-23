@@ -79,6 +79,8 @@ public class SPWorldsPayClient implements ClientModInitializer {
                         if (!playerEntity.input.sneaking) {
                             if (tryParseSignPayment(signBlockEntity, player)) {
                                 return ActionResult.FAIL;
+                            } else {
+                                return ActionResult.PASS;
                             }
                         }
                     }
