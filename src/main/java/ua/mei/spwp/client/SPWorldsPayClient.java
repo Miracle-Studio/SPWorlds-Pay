@@ -10,6 +10,7 @@ import net.kyori.adventure.text.serializer.gson.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.client.*;
+import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.option.*;
 import net.minecraft.client.util.*;
 import net.minecraft.entity.player.*;
@@ -18,10 +19,12 @@ import net.minecraft.util.*;
 import org.lwjgl.glfw.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.*;
+import ua.mei.spwp.client.gui.MessageScreen;
 import ua.mei.spwp.client.gui.bank.*;
 import ua.mei.spwp.config.*;
 import ua.mei.spwp.util.*;
 
+import java.awt.*;
 import java.util.concurrent.*;
 
 public class SPWorldsPayClient implements ClientModInitializer {

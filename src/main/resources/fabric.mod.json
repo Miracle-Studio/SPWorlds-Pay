@@ -21,6 +21,9 @@
       "ua.mei.spwp.SPWorldsPay"
     ]
   },
+  "mixins": [
+    "spwp.mixins.json"
+  ],
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.20"
