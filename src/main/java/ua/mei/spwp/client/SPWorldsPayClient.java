@@ -11,6 +11,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.client.*;
 import net.minecraft.client.gui.screen.*;
+import net.minecraft.client.network.*;
 import net.minecraft.client.option.*;
 import net.minecraft.client.util.*;
 import net.minecraft.entity.player.*;
@@ -73,9 +74,12 @@ public class SPWorldsPayClient implements ClientModInitializer {
             if (block.getBlock() instanceof SignBlock || block.getBlock() instanceof WallSignBlock || block.getBlock() instanceof HangingSignBlock || block.getBlock() instanceof WallHangingSignBlock) {
                 SignBlockEntity signBlockEntity = (SignBlockEntity) world.getBlockEntity(hitResult.getBlockPos());
                 if (signBlockEntity != null) {
-                    if (signBlockEntity.isWaxed()) {
-                        if (tryParseSignPayment(signBlockEntity, player)) {
-                            return ActionResult.SUCCESS;
+                    ClientPlayerEntity playerEntity = MinecraftClient.getInstance().player;
+                    if (playerEntity != null) {
+                        if (!playerEntity.input.sneaking) {
+                            if (tryParseSignPayment(signBlockEntity, player)) {
+                                return ActionResult.FAIL;
+                            }
                         }
                     }
                 }
