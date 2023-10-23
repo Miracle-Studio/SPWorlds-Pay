@@ -18,6 +18,7 @@ import net.minecraft.entity.player.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.lwjgl.glfw.*;
+import ua.mei.spwp.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.*;
 import ua.mei.spwp.client.gui.MessageScreen;
@@ -79,8 +80,6 @@ public class SPWorldsPayClient implements ClientModInitializer {
                         if (!playerEntity.input.sneaking) {
                             if (tryParseSignPayment(signBlockEntity, player)) {
                                 return ActionResult.FAIL;
-                            } else {
-                                return ActionResult.PASS;
                             }
                         }
                     }
@@ -117,7 +116,7 @@ public class SPWorldsPayClient implements ClientModInitializer {
         if (MinecraftClient.getInstance().getCurrentServerEntry() == null) {
             return false;
         }
-        if (!MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru") || !MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru")) {
+        if (!(MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru") || MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru"))) {
             return false;
         }
 
