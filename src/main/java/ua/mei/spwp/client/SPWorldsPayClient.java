@@ -111,7 +111,7 @@ public class SPWorldsPayClient implements ClientModInitializer {
         if (MinecraftClient.getInstance().getCurrentServerEntry() == null) {
             return false;
         }
-        if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru") || MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru")) {
+        if (!MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru") || !MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru")) {
             return false;
         }
 
