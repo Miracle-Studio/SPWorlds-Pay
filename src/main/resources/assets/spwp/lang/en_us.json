@@ -18,7 +18,7 @@
   "gui.spwp.description.balance": "Balance: ",
   "gui.spwp.description.balance_error": "Balance: Error!",
   "gui.spwp.description.successfully_sent": "Successfully sent from the card ",
-  "gui.spwp.description.diamonds_to_the_card": " diamonds to the card ",
+  "gui.spwp.description.diamonds_to_the_card": " DO(Diamond Ore) to the card ",
   "gui.spwp.description.join_to_server": "To open wallet screen you need to play on SP/SPm server",
 
   "gui.spwp.button.ok": "✔ Ok",
