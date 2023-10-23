@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "spwp",
+  "version": "${version}",
+  "name": "SPWorlds Pay",
+  "description": "",
+  "authors": [
+    "MeiNanziiii"
+  ],
+  "contact": {
+    "repo": "https://github.com/Miracle-Studio/SPWorlds-Pay"
+  },
+  "license": "MIT",
+  "icon": "assets/spwp/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "ua.mei.spwp.client.SPWorldsPayClient"
+    ],
+    "main": [
+      "ua.mei.spwp.SPWorldsPay"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.20"
+  }
+}
