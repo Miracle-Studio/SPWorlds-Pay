@@ -114,6 +114,7 @@ public class SPMPage extends BaseOwoScreen<FlowLayout> {
         deleteButton.horizontalSizing(Sizing.fill(100));
         deleteButton.active(false);
         deleteButton.margins(Insets.top(4));
+        deleteButton.tooltip(Text.translatable("gui.spwp.description.delete_card.tooltip"));
 
         ButtonComponent saveButton = Components.button(Text.translatable("gui.spwp.button.save"), button -> {
             SPWorldsPayClient.database.editSpmCard(cardName.getText(), this.cardForEdit.rowId());
@@ -122,6 +123,7 @@ public class SPMPage extends BaseOwoScreen<FlowLayout> {
         saveButton.horizontalSizing(Sizing.fill(100));
         saveButton.active(false);
         saveButton.margins(Insets.top(4));
+        saveButton.tooltip(Text.translatable("gui.spwp.description.save_card.tooltip"));
 
         cardName.onChanged().subscribe((string) -> {
             if (this.cardForEdit != null) {

@@ -20,6 +20,8 @@
   "gui.spwp.description.successfully_sent": "Успешно отправлено с карты ",
   "gui.spwp.description.diamonds_to_the_card": " АР на карту ",
   "gui.spwp.description.join_to_server": "Чтобы открыть кошелёк нужно зайти на сервер СП/СПм",
+  "gui.spwp.description.delete_card.tooltip": "Карта будет удалена только из мода",
+  "gui.spwp.description.save_card.tooltip": "Изменение названия карты влияет только на мод",
 
   "gui.spwp.button.ok": "✔ Ок",
   "gui.spwp.button.save": "\uD83D\uDCBE Сохранить",
