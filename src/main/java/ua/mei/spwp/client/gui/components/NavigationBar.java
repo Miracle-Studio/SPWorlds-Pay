@@ -6,7 +6,7 @@ import io.wispforest.owo.ui.core.*;
 import net.fabricmc.loader.api.*;
 import net.minecraft.client.*;
 import net.minecraft.text.*;
-import ua.mei.spwp.*;
+import ua.mei.spwp.client.*;
 import ua.mei.spwp.client.gui.bank.*;
 
 import java.util.*;
@@ -38,7 +38,7 @@ public class NavigationBar {
                                 .child(
                                         Containers.horizontalFlow(Sizing.fill(25), Sizing.content())
                                                 .child(
-                                                        Components.label(Text.literal("SPWorlds Pay " + FabricLoader.getInstance().getModContainer(SPWorldsPay.MOD_ID).orElseThrow().getMetadata().getVersion().getFriendlyString()))
+                                                        Components.label(Text.literal("SPWorlds Pay " + FabricLoader.getInstance().getModContainer(SPWorldsPayClient.MOD_ID).orElseThrow().getMetadata().getVersion().getFriendlyString()))
                                                                 .shadow(true)
                                                 )
                                                 .horizontalAlignment(HorizontalAlignment.LEFT)

@@ -17,6 +17,7 @@ import net.minecraft.entity.player.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.lwjgl.glfw.*;
+import org.slf4j.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.*;
 import ua.mei.spwp.client.gui.MessageScreen;
@@ -30,6 +31,8 @@ public class SPWorldsPayClient implements ClientModInitializer {
     // public static final ua.mei.spwp.config.SPWorldsPayConfig config = ua.mei.spwp.config.SPWorldsPayConfig.createAndLoad();
     public static final DatabaseWrapper database = new DatabaseWrapper();
     public static final AsyncTasksService asyncTasksService = new AsyncTasksService(Executors.newCachedThreadPool());
+    public static final String MOD_ID = "spwp";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     private static KeyBinding bankGuiKeyBinding;
 
     @Override

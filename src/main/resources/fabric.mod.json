@@ -3,12 +3,14 @@
   "id": "spwp",
   "version": "${version}",
   "name": "SPWorlds Pay",
-  "description": "",
+  "description": "Mod that allows you to manage your SP/SPm cards directly in Minecraft",
   "authors": [
     "MeiNanziiii"
   ],
   "contact": {
-    "repo": "https://github.com/Miracle-Studio/SPWorlds-Pay"
+    "homepage": "https://github.com/Miracle-Studio/SPWorlds-Pay",
+    "sources": "https://github.com/Miracle-Studio/SPWorlds-Pay",
+    "issues": "https://github.com/Miracle-Studio/SPWorlds-Pay/issues"
   },
   "license": "MIT",
   "icon": "assets/spwp/icon.png",
@@ -16,10 +18,16 @@
   "entrypoints": {
     "client": [
       "ua.mei.spwp.client.SPWorldsPayClient"
-    ],
-    "main": [
-      "ua.mei.spwp.SPWorldsPay"
     ]
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/Jc4pqjQdBf",
+        "modmenu.github_releases": "https://github.com/Miracle-Studio/SPWorlds-Pay/releases",
+        "modmenu.modrinth": "https://modrinth.com/mod/spwp"
+      }
+    }
   },
   "mixins": [
     "spwp.mixins.json"

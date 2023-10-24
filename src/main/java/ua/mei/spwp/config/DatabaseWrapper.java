@@ -2,8 +2,8 @@ package ua.mei.spwp.config;
 
 import mrnavastar.sqlib.database.*;
 import net.fabricmc.loader.api.*;
-import ua.mei.spwp.*;
 import ua.mei.spwp.api.types.*;
+import ua.mei.spwp.client.*;
 
 import java.sql.*;
 import java.util.*;
@@ -12,7 +12,7 @@ public class DatabaseWrapper {
     public SQLiteDatabase database;
 
     public DatabaseWrapper() {
-        database = new SQLiteDatabase(SPWorldsPay.MOD_ID, "spwp-cards", FabricLoader.getInstance().getConfigDir().toString());
+        database = new SQLiteDatabase(SPWorldsPayClient.MOD_ID, "spwp-cards", FabricLoader.getInstance().getConfigDir().toString());
         database.executeCommand("CREATE TABLE IF NOT EXISTS spCards (rowId INTEGER NOT NULL PRIMARY KEY, name TEXT, id TEXT, token TEXT)", false);
         database.executeCommand("CREATE TABLE IF NOT EXISTS spmCards (rowId INTEGER NOT NULL PRIMARY KEY, name TEXT, id TEXT, token TEXT)", true);
     }
