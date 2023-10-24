@@ -10,7 +10,6 @@ import net.kyori.adventure.text.serializer.gson.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.client.*;
-import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.network.*;
 import net.minecraft.client.option.*;
 import net.minecraft.client.util.*;
@@ -18,7 +17,6 @@ import net.minecraft.entity.player.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.lwjgl.glfw.*;
-import ua.mei.spwp.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.*;
 import ua.mei.spwp.client.gui.MessageScreen;
@@ -26,7 +24,6 @@ import ua.mei.spwp.client.gui.bank.*;
 import ua.mei.spwp.config.*;
 import ua.mei.spwp.util.*;
 
-import java.awt.*;
 import java.util.concurrent.*;
 
 public class SPWorldsPayClient implements ClientModInitializer {
@@ -125,15 +122,20 @@ public class SPWorldsPayClient implements ClientModInitializer {
             int amount = Integer.parseInt(signBlockEntity.getTextFacing(player).getMessage(2, false).getString());
             String comment = signBlockEntity.getTextFacing(player).getMessage(3, false).getString();
 
-            Transaction transaction = new Transaction(cardNumber, amount, comment);
+            if (amount > 0 && cardNumber.matches("[0-9]+") && cardNumber.length() == 5) {
+                Transaction transaction = new Transaction(cardNumber, amount, comment);
 
-            if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru")) {
-                MinecraftClient.getInstance().setScreen(new SPPage(transaction));
-            } else if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru")) {
-                MinecraftClient.getInstance().setScreen(new SPMPage(transaction));
+                if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru")) {
+                    MinecraftClient.getInstance().setScreen(new SPPage(transaction));
+                    return true;
+                } else if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru")) {
+                    MinecraftClient.getInstance().setScreen(new SPMPage(transaction));
+                    return true;
+
+                }
             }
 
-            return true;
+            return false;
         } catch (NumberFormatException e) {
             return false;
         }
