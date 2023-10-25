@@ -1,10 +1,10 @@
 ## EN
 
-Mod that allows you to manage your SP/SPm cards directly in Minecraft.
+Mod that allows you to manage your [SP/SPm](https://spworlds.ru) cards directly in Minecraft.
 
 ## RU
 
-Мод, позволяющий удобнее управлять своими картами на СП/СПм, прямо в майнкрафте.
+Мод, позволяющий удобнее управлять своими картами на [СП/СПм](https://spworlds.ru), прямо в майнкрафте.
 
 ### Возможности мода
 
