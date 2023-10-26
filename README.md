@@ -14,8 +14,8 @@ To transfer ARs, you need to enter<br>
 <img src="https://i.imgur.com/uTYGbfu.png" />
 </details>
 <details>
-<summary>Plate payment</summary>
-<b>ALERT!!! To edit the table you now need to hold Shift (if the data is not correct, you can edit without holding Shift).</b><br>
+<summary>Sign payment</summary>
+<b>ALERT!!! To edit the sign you now need to hold Shift (if the data is not correct, you can edit without holding Shift).</b><br>
 By right-clicking, you will be able to translate the ARs. If it will be filled in according to the special form<br>
 <br>
 1. #SPWP<br>
