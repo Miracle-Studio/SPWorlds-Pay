@@ -51,7 +51,7 @@ public class SPWorldsPayClient implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (bankGuiKeyBinding.wasPressed()) {
-                if (MinecraftClient.getInstance().getCurrentServerEntry() != null) {
+                /* if (MinecraftClient.getInstance().getCurrentServerEntry() != null) {
                     if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru")) {
                         MinecraftClient.getInstance().setScreen(new SPPage());
                     } else if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru")) {
@@ -61,7 +61,8 @@ public class SPWorldsPayClient implements ClientModInitializer {
                     }
                 } else {
                     MessageScreen.openMessage(Text.translatable("gui.spwp.title.error"), Text.translatable("gui.spwp.description.join_to_server"));
-                }
+                } */
+                MinecraftClient.getInstance().setScreen(new NewPage());
             }
         });
 
