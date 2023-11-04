@@ -1,43 +1,28 @@
 package ua.mei.spwp.client.gui.components;
 
-import com.mojang.blaze3d.systems.*;
 import io.wispforest.owo.mixin.ui.access.*;
 import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.core.*;
-import io.wispforest.owo.ui.util.*;
 import net.minecraft.client.*;
 import net.minecraft.client.font.*;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.tooltip.*;
 import net.minecraft.text.*;
-import net.minecraft.util.*;
 
 import java.util.function.*;
 
-public class BedrockButton extends ButtonComponent {
-    public static final Identifier ACTIVE_TEXTURE = new Identifier("spwp", "bedrock_button/active");
-    public static final Identifier HOVERED_TEXTURE = new Identifier("spwp", "bedrock_button/hovered");
-    public static final Identifier DISABLED_TEXTURE = new Identifier("spwp", "bedrock_button/disabled");
-
-    public BedrockButton(Text message, Consumer<ButtonComponent> onPress) {
+public class TransparentButton extends ButtonComponent {
+    public TransparentButton(Text message, Consumer<ButtonComponent> onPress) {
         super(message, onPress);
-        this.horizontalSizing(Sizing.fixed(66));
-        this.verticalSizing(Sizing.fixed(26));
     }
 
     @Override
     public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-        RenderSystem.enableDepthTest();
+        int DEFAULT_COLOR = 0x00FFFFFF;
+        int HIGHLIGHT_COLOR = 0x25000000;
 
-        Identifier texture = ACTIVE_TEXTURE;
-
-        if (!this.active) {
-            texture = DISABLED_TEXTURE;
-        } else if (this.isHovered()) {
-            texture = HOVERED_TEXTURE;
-        }
-
-        NinePatchTexture.draw(texture, (OwoUIDrawContext) context, this.getX(), this.getY(), this.width, this.height);
+        Insets margins = this.margins().get();
+        context.fill(this.getX() - margins.left(), this.getY() - margins.top(), this.getX() + this.width + margins.right(), this.getY() + this.height + margins.bottom(), this.hovered ? HIGHLIGHT_COLOR : DEFAULT_COLOR);
 
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
         int color = this.active ? 0xffffff : 0xa0a0a0;
