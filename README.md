@@ -1,4 +1,4 @@
-## EN
+## ENG
 
 Mod that allows you to manage your [SP/SPm](https://spworlds.ru) cards directly in Minecraft.
 
