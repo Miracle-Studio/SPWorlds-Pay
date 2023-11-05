@@ -31,7 +31,7 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
     @Override
     public void close() {
         super.close();
-        MinecraftClient.getInstance().getWindow().setScaleFactor(MinecraftClient.getInstance().getWindow().calculateScaleFactor(oldGuiScale, MinecraftClient.getInstance().options.getForceUnicodeFont().getValue()));
+        MinecraftClient.getInstance().getWindow().setScaleFactor(MinecraftClient.getInstance().getWindow().calculateScaleFactor(2, MinecraftClient.getInstance().options.getForceUnicodeFont().getValue()));
     }
 
     @Override
@@ -44,6 +44,25 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
                                 .surface(SPWorldsComponents.ESSENTIAL_NAV)
                         )
                         .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fill(70))
+                                .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fill(100))
+                                        .child(Containers.verticalFlow(Sizing.fill(25), Sizing.fill(100))
+                                                .child(Containers.verticalFlow(Sizing.fill(100), Sizing.content())
+                                                        .child(new TabGroup((index) -> {
+
+                                                                })
+                                                                        .addTab(Text.literal("СП"))
+                                                                        .addTab(Text.literal("СПм"))
+                                                                        .addTab(Text.literal("PoopLand"))
+                                                                        .padding(Insets.of(10, 10, 12, 12))
+                                                        )
+                                                        .child(Components.box(Sizing.fill(100), Sizing.fixed(3)).color(Color.ofArgb(EssentialColorScheme.BORDER)).fill(true))
+                                                )
+                                        )
+                                        .child(Containers.verticalFlow(Sizing.fill(75), Sizing.fill(100))
+                                                .child(Components.box(Sizing.fixed(3), Sizing.fill(100)).color(Color.ofArgb(EssentialColorScheme.BORDER)).fill(true))
+                                        )
+                                        .margins(Insets.of(0, 3, 3, 3))
+                                )
                                 .surface(SPWorldsComponents.ESSENTIAL_PANEL)
                         )
                 )
