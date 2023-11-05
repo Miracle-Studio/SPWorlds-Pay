@@ -11,5 +11,9 @@ public class EssentialColorScheme {
 
     public static final int HOVERED_TAB_TEXT = 0xFFE2E2E2;
 
+    public static final int MODAL_TEXT = 0xFFE2E2E2;
+
+    public static final int MODAL_OUTLINE = 0xFF474747;
+
     public static final int BORDER = 0xFF232323;
 }
