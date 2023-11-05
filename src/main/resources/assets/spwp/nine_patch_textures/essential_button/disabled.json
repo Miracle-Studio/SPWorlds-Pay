@@ -1,7 +1,8 @@
 {
-  "texture": "spwp:textures/gui/bedrock_buttons.png",
+  "texture": "spwp:textures/gui/essential_buttons.png",
   "texture_width": 64,
   "texture_height": 192,
+  "v": 128,
   "repeat": true,
   "corner_patch_size": {
     "width": 3,

@@ -5,10 +5,11 @@ import io.wispforest.owo.ui.util.*;
 import net.minecraft.util.*;
 
 public class SPWorldsComponents {
-    public static Surface BEDROCK_WINDOW = (context, component) -> {
-        NinePatchTexture.draw(new Identifier("spwp", "panel/bedrock_window"), context, component);
+    public static Surface ESSENTIAL_NAV = (context, component) -> {
+        NinePatchTexture.draw(new Identifier("spwp", "panel/essential_nav"), context, component);
     };
-    public static Surface BEDROCK_BAR = (context, component) -> {
-        NinePatchTexture.draw(new Identifier("spwp", "panel/bedrock_bar"), context, component);
+
+    public static Surface ESSENTIAL_PANEL = (context, component) -> {
+        NinePatchTexture.draw(new Identifier("spwp", "panel/essential_panel"), context, component);
     };
 }

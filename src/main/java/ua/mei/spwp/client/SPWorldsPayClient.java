@@ -5,11 +5,13 @@ import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.*;
 import net.fabricmc.fabric.api.client.keybinding.v1.*;
 import net.fabricmc.fabric.api.client.message.v1.*;
+import net.fabricmc.fabric.api.client.screen.v1.*;
 import net.fabricmc.fabric.api.event.player.*;
 import net.kyori.adventure.text.serializer.gson.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.client.*;
+import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.network.*;
 import net.minecraft.client.option.*;
 import net.minecraft.client.util.*;
@@ -62,7 +64,8 @@ public class SPWorldsPayClient implements ClientModInitializer {
                 } else {
                     MessageScreen.openMessage(Text.translatable("gui.spwp.title.error"), Text.translatable("gui.spwp.description.join_to_server"));
                 } */
-                MinecraftClient.getInstance().setScreen(new NewPage());
+                int oldGuiScale = MinecraftClient.getInstance().options.getGuiScale().getValue();
+                MinecraftClient.getInstance().setScreen(new NewPage(oldGuiScale));
             }
         });
 

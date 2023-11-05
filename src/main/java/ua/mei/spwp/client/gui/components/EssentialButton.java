@@ -14,15 +14,13 @@ import net.minecraft.util.*;
 
 import java.util.function.*;
 
-public class BedrockButton extends ButtonComponent {
-    public static final Identifier ACTIVE_TEXTURE = new Identifier("spwp", "bedrock_button/active");
-    public static final Identifier HOVERED_TEXTURE = new Identifier("spwp", "bedrock_button/hovered");
-    public static final Identifier DISABLED_TEXTURE = new Identifier("spwp", "bedrock_button/disabled");
+public class EssentialButton extends ButtonComponent {
+    public static final Identifier ACTIVE_TEXTURE = new Identifier("spwp", "essential_button/active");
+    public static final Identifier HOVERED_TEXTURE = new Identifier("spwp", "essential_button/hovered");
+    public static final Identifier DISABLED_TEXTURE = new Identifier("spwp", "essential_button/disabled");
 
-    public BedrockButton(Text message, Consumer<ButtonComponent> onPress) {
+    public EssentialButton(Text message, Consumer<ButtonComponent> onPress) {
         super(message, onPress);
-        this.horizontalSizing(Sizing.fixed(66));
-        this.verticalSizing(Sizing.fixed(26));
     }
 
     @Override
