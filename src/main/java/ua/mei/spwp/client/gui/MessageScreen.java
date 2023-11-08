@@ -5,10 +5,9 @@ import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
 import net.minecraft.text.*;
-import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
+import ua.mei.spwp.client.gui.components.*;
 
 public class MessageScreen extends BaseOwoScreen<FlowLayout> {
     public MutableText title;
@@ -30,27 +29,30 @@ public class MessageScreen extends BaseOwoScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
-        rootComponent.child(
-                        Containers.verticalFlow(Sizing.fill(60), Sizing.content())
-                                .child(
-                                        Components.label(this.title)
-                                                .shadow(true)
-                                )
-                                .child(
-                                        Components.label(this.message)
-                                                .maxWidth(250)
+        rootComponent.child(Containers.verticalFlow(Sizing.fill(35), Sizing.content())
+                        .child(Containers.verticalFlow(Sizing.fill(100), Sizing.content())
+                                .child(Containers.verticalFlow(Sizing.fill(100), Sizing.content())
+                                        .child(Components.label(this.title)
+                                                .color(Color.ofArgb(EssentialColorScheme.MODAL_TEXT))
                                                 .horizontalTextAlignment(HorizontalAlignment.CENTER)
-                                                .color(Color.ofRgb(Colors.GRAY))
-                                                .margins(Insets.top(5))
+                                                .shadow(true)
+                                                .horizontalSizing(Sizing.fill(100))
+                                        )
+                                        .child(Components.label(this.message)
+                                                .color(Color.ofArgb(EssentialColorScheme.MODAL_TEXT))
+                                                .horizontalTextAlignment(HorizontalAlignment.CENTER)
+                                                .shadow(true)
+                                                .horizontalSizing(Sizing.fill(100))
+                                        )
+                                        .gap(13)
                                 )
-                                .child(
-                                        Components.button(Text.translatable("gui.spwp.button.ok"), button -> {
-                                            MinecraftClient.getInstance().setScreen(null);
-                                        }).margins(Insets.top(5)).horizontalSizing(Sizing.fill(100))
-                                )
-                                .padding(Insets.of(15))
-                                .horizontalAlignment(HorizontalAlignment.CENTER)
-                                .verticalAlignment(VerticalAlignment.CENTER)
+                                .child(new EssentialButton(Text.translatable("gui.spwp.button.ok"), button -> {
+                                    MinecraftClient.getInstance().setScreen(null);
+                                }).horizontalSizing(Sizing.fill(100)))
+                                .gap(18)
+                                .margins(Insets.of(17))
+                        )
+                        .surface(Surface.flat(EssentialColorScheme.BACKGROUND).and(Surface.outline(EssentialColorScheme.MODAL_OUTLINE)))
                 )
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER)

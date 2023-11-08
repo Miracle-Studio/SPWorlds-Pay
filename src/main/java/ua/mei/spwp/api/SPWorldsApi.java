@@ -24,6 +24,7 @@ public class SPWorldsApi {
 
     public static void transfer(Card card, Transaction transaction) {
         String json = gson.toJson(transaction);
+
         request(card, "transactions", "POST", json);
     }
 
