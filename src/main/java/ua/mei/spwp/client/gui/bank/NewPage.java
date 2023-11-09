@@ -31,7 +31,7 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
     @Override
     public void close() {
         super.close();
-        MinecraftClient.getInstance().getWindow().setScaleFactor(MinecraftClient.getInstance().getWindow().calculateScaleFactor(2, MinecraftClient.getInstance().options.getForceUnicodeFont().getValue()));
+        MinecraftClient.getInstance().getWindow().setScaleFactor(MinecraftClient.getInstance().getWindow().calculateScaleFactor(this.oldGuiScale, MinecraftClient.getInstance().options.getForceUnicodeFont().getValue()));
     }
 
     @Override

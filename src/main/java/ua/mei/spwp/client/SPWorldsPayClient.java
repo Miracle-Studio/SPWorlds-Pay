@@ -5,24 +5,20 @@ import net.fabricmc.api.*;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.*;
 import net.fabricmc.fabric.api.client.keybinding.v1.*;
 import net.fabricmc.fabric.api.client.message.v1.*;
-import net.fabricmc.fabric.api.client.screen.v1.*;
 import net.fabricmc.fabric.api.event.player.*;
 import net.kyori.adventure.text.serializer.gson.*;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.*;
 import net.minecraft.client.*;
-import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.network.*;
 import net.minecraft.client.option.*;
 import net.minecraft.client.util.*;
 import net.minecraft.entity.player.*;
-import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.lwjgl.glfw.*;
 import org.slf4j.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.*;
-import ua.mei.spwp.client.gui.MessageScreen;
 import ua.mei.spwp.client.gui.bank.*;
 import ua.mei.spwp.config.*;
 import ua.mei.spwp.util.*;
@@ -106,7 +102,7 @@ public class SPWorldsPayClient implements ClientModInitializer {
                         String cardToken = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(0).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
 
                         Card newCard = new Card(cardName, cardId, cardToken);
-                        MinecraftClient.getInstance().setScreen(new AddCardScreen(newCard));
+                        MinecraftClient.getInstance().setScreen(new AddCardModal(newCard));
                     }
                 }
             }

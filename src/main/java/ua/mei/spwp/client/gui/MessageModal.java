@@ -7,14 +7,19 @@ import io.wispforest.owo.ui.core.*;
 import net.minecraft.client.*;
 import net.minecraft.text.*;
 import org.jetbrains.annotations.*;
-import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.components.*;
 
-public class AddCardScreen extends BaseOwoScreen<FlowLayout> {
-    public Card newCard;
+public class MessageModal extends BaseOwoScreen<FlowLayout> {
+    public MutableText title;
+    public MutableText message;
 
-    public AddCardScreen(Card newCard) {
-        this.newCard = newCard;
+    public MessageModal(MutableText title, MutableText message) {
+        this.title = title;
+        this.message = message;
+    }
+
+    public static void openMessage(MutableText title, MutableText message) {
+        MinecraftClient.getInstance().setScreen(new MessageModal(title, message));
     }
 
     @Override
@@ -27,13 +32,13 @@ public class AddCardScreen extends BaseOwoScreen<FlowLayout> {
         rootComponent.child(Containers.verticalFlow(Sizing.fill(35), Sizing.content())
                         .child(Containers.verticalFlow(Sizing.fill(100), Sizing.content())
                                 .child(Containers.verticalFlow(Sizing.fill(100), Sizing.content())
-                                        .child(Components.label(Text.translatable("gui.spwp.title.add_card"))
+                                        .child(Components.label(this.title)
                                                 .color(Color.ofArgb(EssentialColorScheme.MODAL_TEXT))
                                                 .horizontalTextAlignment(HorizontalAlignment.CENTER)
                                                 .shadow(true)
                                                 .horizontalSizing(Sizing.fill(100))
                                         )
-                                        .child(Components.label(Text.translatable("gui.spwp.description.want_add_card").append("\n" + this.newCard.name() + "?"))
+                                        .child(Components.label(this.message)
                                                 .color(Color.ofArgb(EssentialColorScheme.MODAL_TEXT))
                                                 .horizontalTextAlignment(HorizontalAlignment.CENTER)
                                                 .shadow(true)
@@ -41,16 +46,9 @@ public class AddCardScreen extends BaseOwoScreen<FlowLayout> {
                                         )
                                         .gap(13)
                                 )
-                                .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.content())
-                                        .child(new EssentialButton(Text.translatable("gui.spwp.button.no"), button -> {
-                                            MinecraftClient.getInstance().setScreen(null);
-                                        }).horizontalSizing(Sizing.fill(47)))
-                                        .child(new EssentialBlueButton(Text.translatable("gui.spwp.button.yes"), button -> {
-                                            MinecraftClient.getInstance().setScreen(null);
-                                        }).horizontalSizing(Sizing.fill(47)))
-                                        .gap(8)
-                                        .horizontalAlignment(HorizontalAlignment.CENTER)
-                                )
+                                .child(new EssentialButton(Text.translatable("gui.spwp.button.ok"), button -> {
+                                    MinecraftClient.getInstance().setScreen(null);
+                                }).horizontalSizing(Sizing.fill(100)))
                                 .gap(18)
                                 .margins(Insets.of(17))
                         )

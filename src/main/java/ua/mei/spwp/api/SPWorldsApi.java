@@ -39,7 +39,7 @@ public class SPWorldsApi {
             HttpResponse<String> response = httpClient.send(requestBuilder.build(), HttpResponse.BodyHandlers.ofString());
             return gson.fromJson(response.body(), JsonObject.class);
         } catch (Exception e) {
-            MessageScreen.openMessage(Text.translatable("gui.spwp.title.error"), Text.literal(e.getMessage()));
+            MessageModal.openMessage(Text.translatable("gui.spwp.title.error"), Text.literal(e.getMessage()));
             return null;
         }
     }

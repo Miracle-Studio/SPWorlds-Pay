@@ -74,7 +74,7 @@ public class SPMPage extends BaseOwoScreen<FlowLayout> {
                                             SPWorldsPayClient.database.addSpmCard(newCard);
                                             MinecraftClient.getInstance().setScreen(new SPMPage());
                                         } else {
-                                            MinecraftClient.getInstance().setScreen(new MessageScreen(Text.translatable("gui.spwp.title.error"), Text.translatable("gui.spwp.description.ddos_error")));
+                                            MinecraftClient.getInstance().setScreen(new MessageModal(Text.translatable("gui.spwp.title.error"), Text.translatable("gui.spwp.description.ddos_error")));
                                         }
                                     }, exception -> {
 
@@ -109,7 +109,7 @@ public class SPMPage extends BaseOwoScreen<FlowLayout> {
 
         ButtonComponent deleteButton = Components.button(Text.translatable("gui.spwp.button.delete"), button -> {
             SPWorldsPayClient.database.deleteSpmCard(this.cardForEdit.rowId());
-            MessageScreen.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.card").append(this.cardForEdit.card().name()).append(Text.translatable("gui.spwp.description.card_deleted")));
+            MessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.card").append(this.cardForEdit.card().name()).append(Text.translatable("gui.spwp.description.card_deleted")));
         });
         deleteButton.horizontalSizing(Sizing.fill(100));
         deleteButton.active(false);
@@ -118,7 +118,7 @@ public class SPMPage extends BaseOwoScreen<FlowLayout> {
 
         ButtonComponent saveButton = Components.button(Text.translatable("gui.spwp.button.save"), button -> {
             SPWorldsPayClient.database.editSpmCard(cardName.getText(), this.cardForEdit.rowId());
-            MessageScreen.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.card").append(this.cardForEdit.card().name()).append(Text.translatable("gui.spwp.description.card_edited")).append(cardName.getText() + "!"));
+            MessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.card").append(this.cardForEdit.card().name()).append(Text.translatable("gui.spwp.description.card_edited")).append(cardName.getText() + "!"));
         });
         saveButton.horizontalSizing(Sizing.fill(100));
         saveButton.active(false);
@@ -244,7 +244,7 @@ public class SPMPage extends BaseOwoScreen<FlowLayout> {
             } else {
                 SPWorldsApi.transfer(this.selectedCard, new Transaction(cardNumber.getText(), Integer.parseInt(amount.getText()), comment.getText().isEmpty() ? "Нет комментария" : comment.getText()));
             }
-            MessageScreen.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.successfully_sent").append(this.selectedCard.name() + " " + amount.getText()).append(Text.translatable("gui.spwp.description.diamonds_to_the_card")).append(cardNumber.getText()));
+            MessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.successfully_sent").append(this.selectedCard.name() + " " + amount.getText()).append(Text.translatable("gui.spwp.description.diamonds_to_the_card")).append(cardNumber.getText()));
         });
 
         cardNumber.onChanged().subscribe((string) -> {
