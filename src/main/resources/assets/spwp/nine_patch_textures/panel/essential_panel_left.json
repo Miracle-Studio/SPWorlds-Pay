@@ -1,0 +1,10 @@
+{
+  "texture": "spwp:textures/gui/essential_panel_left.png",
+  "texture_width": 9,
+  "texture_height": 9,
+  "repeat": false,
+  "patch_size": {
+    "width": 3,
+    "height": 3
+  }
+}

@@ -36,7 +36,7 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
-        rootComponent.child(Containers.verticalFlow(Sizing.fill(85), Sizing.content())
+        /* rootComponent.child(Containers.verticalFlow(Sizing.fill(85), Sizing.content())
                         .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(30))
                                 .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fill(100))
                                         .child(Components.label(Text.literal("Кошелёк")).color(Color.ofArgb(EssentialColorScheme.SCREEN_TITLE)).shadow(true).margins(Insets.of(11, 0, 13, 0)))
@@ -68,6 +68,6 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
                 )
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER)
-                .surface(Surface.flat(EssentialColorScheme.BACKGROUND));
+                .surface(Surface.flat(EssentialColorScheme.BACKGROUND)); */
     }
 }
