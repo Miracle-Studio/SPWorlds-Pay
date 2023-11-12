@@ -7,10 +7,14 @@ import io.wispforest.owo.ui.core.*;
 import net.minecraft.client.*;
 import net.minecraft.text.*;
 import org.jetbrains.annotations.*;
+import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.*;
 import ua.mei.spwp.client.gui.components.*;
 
 public class NewPage extends BaseOwoScreen<FlowLayout> {
+    public Server server = Server.SP;
+    public DatabaseCard card = null;
+
     public int oldGuiScale;
 
     public NewPage(int oldGuiScale) {
@@ -36,38 +40,58 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
-        /* rootComponent.child(Containers.verticalFlow(Sizing.fill(85), Sizing.content())
-                        .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(30))
-                                .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fill(100))
-                                        .child(Components.label(Text.literal("Кошелёк")).color(Color.ofArgb(EssentialColorScheme.SCREEN_TITLE)).shadow(true).margins(Insets.of(11, 0, 13, 0)))
-                                )
-                                .surface(SPWorldsComponents.ESSENTIAL_NAV)
-                        )
-                        .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fill(70))
-                                .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fill(100))
-                                        .child(Containers.verticalFlow(Sizing.fill(25), Sizing.fill(100))
-                                                .child(Containers.verticalFlow(Sizing.fill(100), Sizing.content())
-                                                        .child(new TabGroup((index) -> {
+        EssentialScrollContainer cardList = new EssentialScrollContainer(ScrollContainer.ScrollDirection.VERTICAL, Sizing.fill(100), Sizing.fill(100), new CardList(this.server, card -> {
+            this.card = card;
+        }));
 
-                                                                })
-                                                                        .addTab(Text.literal("СП"))
-                                                                        .addTab(Text.literal("СПм"))
-                                                                        .addTab(Text.literal("PoopLand"))
-                                                                        .padding(Insets.of(10, 10, 12, 12))
-                                                        )
-                                                        .child(Components.box(Sizing.fill(100), Sizing.fixed(3)).color(Color.ofArgb(EssentialColorScheme.BORDER)).fill(true))
-                                                )
-                                        )
-                                        .child(Containers.verticalFlow(Sizing.fill(75), Sizing.fill(100))
-                                                .child(Components.box(Sizing.fixed(3), Sizing.fill(100)).color(Color.ofArgb(EssentialColorScheme.BORDER)).fill(true))
-                                        )
-                                        .margins(Insets.of(0, 3, 3, 3))
+        ServerList serverList = new ServerList(server -> {
+            this.card = null;
+            this.server = server;
+
+            cardList.child(new CardList(server, card -> {
+                this.card = card;
+            }));
+        });
+        serverList.padding(Insets.of(10, 10, 12, 12));
+
+        rootComponent.child(Containers.verticalFlow(Sizing.fill(85), Sizing.content())
+                        .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(30))
+                                .child(Containers.horizontalFlow(Sizing.fill(25), Sizing.fill(100))
+                                        .child(Components.label(Text.literal("Кошелёк")).color(Color.ofArgb(EssentialColorScheme.SCREEN_TITLE)).shadow(true).margins(Insets.of(11, 0, 13, 0)))
+                                        .surface(EssentialSurface.ESSENTIAL_NAV_LEFT)
                                 )
-                                .surface(SPWorldsComponents.ESSENTIAL_PANEL)
+                                .child(Containers.horizontalFlow(Sizing.fill(75), Sizing.fill(100))
+                                        .child(Components.label(Text.literal("Переводы")).color(Color.ofArgb(EssentialColorScheme.SCREEN_TITLE)).shadow(true).margins(Insets.of(11, 0, 10, 0)))
+                                        .surface(EssentialSurface.ESSENTIAL_NAV_RIGHT)
+                                )
+                        )
+                        .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(30))
+                                .child(Containers.horizontalFlow(Sizing.fill(25), Sizing.fill(100))
+                                        .child(serverList)
+                                        .surface(EssentialSurface.ESSENTIAL_PANEL_LEFT)
+                                )
+                                .child(Containers.horizontalFlow(Sizing.fill(75), Sizing.fill(100))
+                                        .surface(EssentialSurface.ESSENTIAL_PANEL_RIGHT_TOP)
+                                )
+                        )
+                        .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fill(65))
+                                .child(Containers.horizontalFlow(Sizing.fill(25), Sizing.fill(100))
+                                        .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fill(100))
+                                                .child(cardList)
+                                                .margins(Insets.of(0, 3, 3, 0))
+                                        )
+                                        .surface(EssentialSurface.ESSENTIAL_PANEL_LEFT)
+                                )
+                                .child(Containers.horizontalFlow(Sizing.fill(75), Sizing.fill(100))
+                                        .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fill(100))
+                                                .margins(Insets.of(0, 33, 0, 3))
+                                        )
+                                        .surface(EssentialSurface.ESSENTIAL_PANEL_RIGHT)
+                                )
                         )
                 )
                 .horizontalAlignment(HorizontalAlignment.CENTER)
                 .verticalAlignment(VerticalAlignment.CENTER)
-                .surface(Surface.flat(EssentialColorScheme.BACKGROUND)); */
+                .surface(Surface.flat(EssentialColorScheme.BACKGROUND));
     }
 }

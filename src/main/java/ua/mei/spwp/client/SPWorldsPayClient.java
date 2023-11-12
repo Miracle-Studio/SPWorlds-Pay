@@ -14,6 +14,7 @@ import net.minecraft.client.network.*;
 import net.minecraft.client.option.*;
 import net.minecraft.client.util.*;
 import net.minecraft.entity.player.*;
+import net.minecraft.server.command.*;
 import net.minecraft.util.*;
 import org.lwjgl.glfw.*;
 import org.slf4j.*;
@@ -23,6 +24,7 @@ import ua.mei.spwp.client.gui.bank.*;
 import ua.mei.spwp.config.*;
 import ua.mei.spwp.util.*;
 
+import java.awt.event.*;
 import java.util.concurrent.*;
 
 public class SPWorldsPayClient implements ClientModInitializer {
@@ -90,8 +92,8 @@ public class SPWorldsPayClient implements ClientModInitializer {
         });
 
         ClientReceiveMessageEvents.GAME.register(((message, overlay) -> {
-            if (MinecraftClient.getInstance().getCurrentServerEntry() != null) {
-                if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru") || MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru")) {
+
+                if (SPMath.server() != Server.OTHER) {
                     Gson gson = new Gson();
                     JsonObject jsonMessage = gson.fromJson(GsonComponentSerializer.gson().serialize(message.asComponent()), JsonObject.class);
                     String stringMessage = message.getString();
@@ -105,7 +107,7 @@ public class SPWorldsPayClient implements ClientModInitializer {
                         MinecraftClient.getInstance().setScreen(new AddCardModal(newCard));
                     }
                 }
-            }
+
         }));
     }
 

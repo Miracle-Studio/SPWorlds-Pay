@@ -1,8 +1,9 @@
 package ua.mei.spwp.client.gui;
 
-public enum TabEnum {
+public enum Server {
     SP,
     SPm,
-    SPb,
-    PoopLand;
+    PoopLand,
+
+    OTHER;
 }

@@ -8,7 +8,9 @@ import net.minecraft.client.*;
 import net.minecraft.text.*;
 import org.jetbrains.annotations.*;
 import ua.mei.spwp.api.types.*;
+import ua.mei.spwp.client.*;
 import ua.mei.spwp.client.gui.components.*;
+import ua.mei.spwp.util.*;
 
 public class AddCardModal extends BaseOwoScreen<FlowLayout> {
     public Card newCard;
@@ -46,6 +48,11 @@ public class AddCardModal extends BaseOwoScreen<FlowLayout> {
                                             MinecraftClient.getInstance().setScreen(null);
                                         }).horizontalSizing(Sizing.fill(47)))
                                         .child(new EssentialBlueButton(Text.translatable("gui.spwp.button.yes"), button -> {
+                                            switch (SPMath.server()) {
+                                                case SP -> SPWorldsPayClient.database.addSpCard(this.newCard);
+                                                case SPm -> SPWorldsPayClient.database.addSpmCard(this.newCard);
+                                                case PoopLand -> SPWorldsPayClient.database.addPooplandCard(this.newCard);
+                                            }
                                             MinecraftClient.getInstance().setScreen(null);
                                         }).horizontalSizing(Sizing.fill(47)))
                                         .gap(8)
