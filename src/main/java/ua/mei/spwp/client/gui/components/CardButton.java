@@ -35,7 +35,7 @@ public class CardButton extends FlowLayout {
                         .child(Components.label(Text.literal(card.card().name())).color(Color.ofArgb(EssentialColorScheme.MODAL_TEXT)).shadow(true))
                         .child(Components.label(Text.literal("Баланс: 69")).color(Color.ofArgb(0xFF747474)).shadow(false))
                         .gap(4)
-                        .margins(Insets.top(1))
+                        .margins(Insets.top(2))
                         .verticalAlignment(VerticalAlignment.CENTER)
                 )
                 .gap(8)

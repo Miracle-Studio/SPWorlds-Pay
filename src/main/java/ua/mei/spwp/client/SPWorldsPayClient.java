@@ -14,7 +14,6 @@ import net.minecraft.client.network.*;
 import net.minecraft.client.option.*;
 import net.minecraft.client.util.*;
 import net.minecraft.entity.player.*;
-import net.minecraft.server.command.*;
 import net.minecraft.util.*;
 import org.lwjgl.glfw.*;
 import org.slf4j.*;
@@ -24,7 +23,6 @@ import ua.mei.spwp.client.gui.bank.*;
 import ua.mei.spwp.config.*;
 import ua.mei.spwp.util.*;
 
-import java.awt.event.*;
 import java.util.concurrent.*;
 
 public class SPWorldsPayClient implements ClientModInitializer {
@@ -92,19 +90,23 @@ public class SPWorldsPayClient implements ClientModInitializer {
         });
 
         ClientReceiveMessageEvents.GAME.register(((message, overlay) -> {
-
                 if (SPMath.server() != Server.OTHER) {
                     Gson gson = new Gson();
                     JsonObject jsonMessage = gson.fromJson(GsonComponentSerializer.gson().serialize(message.asComponent()), JsonObject.class);
                     String stringMessage = message.getString();
 
-                    if (stringMessage.startsWith("[") && (!stringMessage.contains("[СП]") || !stringMessage.contains("[СПм]")) && stringMessage.endsWith("] Управление картой [Копир. токен] [Копир. айди]")) {
-                        String cardName = jsonMessage.get("text").getAsString().replace("[", "").replace("] ", "");
-                        String cardId = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(1).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
-                        String cardToken = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(0).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
+                    if (stringMessage.startsWith("[") && (!stringMessage.startsWith("[СП]") || !stringMessage.startsWith("[СПм]")) && stringMessage.endsWith("] Управление картой [Копир. токен] [Копир. айди]")) {
+                        try {
+                            String cardName = jsonMessage.get("text").getAsString().replace("[", "").replace("] ", "");
+                            String cardId = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(1).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
+                            String cardToken = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(0).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
 
-                        Card newCard = new Card(cardName, cardId, cardToken);
-                        MinecraftClient.getInstance().setScreen(new AddCardModal(newCard));
+                            Card newCard = new Card(cardName, cardId, cardToken);
+                            MinecraftClient.getInstance().setScreen(new AddCardModal(newCard));
+                        } catch (NullPointerException ignored) {
+                            // Если игроки додумаются каким-то способом обойти проверку
+                            // на реальное сообщение с токеном и айди, то майнкрафт не крашило
+                        }
                     }
                 }
 
