@@ -10,6 +10,7 @@ import org.jetbrains.annotations.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.*;
 import ua.mei.spwp.client.gui.components.*;
+import ua.mei.spwp.util.*;
 
 public class NewPage extends BaseOwoScreen<FlowLayout> {
     public Server server = Server.SP;
@@ -28,14 +29,16 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
 
     @Override
     public void onDisplayed() {
-        super.onDisplayed();
-        MinecraftClient.getInstance().getWindow().setScaleFactor(MinecraftClient.getInstance().getWindow().calculateScaleFactor(2, MinecraftClient.getInstance().options.getForceUnicodeFont().getValue()));
+        MinecraftClient.getInstance().options.getGuiScale().setValue(2);
+        MinecraftClient.getInstance().onResolutionChanged();
     }
 
     @Override
     public void close() {
+        MinecraftClient.getInstance().options.getGuiScale().setValue(this.oldGuiScale);
+        MinecraftClient.getInstance().onResolutionChanged();
+
         super.close();
-        MinecraftClient.getInstance().getWindow().setScaleFactor(MinecraftClient.getInstance().getWindow().calculateScaleFactor(this.oldGuiScale, MinecraftClient.getInstance().options.getForceUnicodeFont().getValue()));
     }
 
     @Override

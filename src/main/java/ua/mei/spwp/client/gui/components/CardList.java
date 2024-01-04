@@ -32,7 +32,6 @@ public class CardList extends FlowLayout {
         List<DatabaseCard> cards = switch(this.server) {
             case SP -> SPWorldsPayClient.database.getSpCards();
             case SPm -> SPWorldsPayClient.database.getSpmCards();
-            case PoopLand -> SPWorldsPayClient.database.getPooplandCards();
             case OTHER -> new ArrayList<>();
         };
 

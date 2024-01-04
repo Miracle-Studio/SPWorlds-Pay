@@ -19,9 +19,6 @@ public class SPMath {
                     case "spm.spworlds.ru" -> {
                         return Server.SPm;
                     }
-                    case "pl.spworlds.ru" -> {
-                        return Server.PoopLand;
-                    }
                 }
             }
         }

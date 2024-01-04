@@ -15,7 +15,6 @@ public class DatabaseWrapper {
         database = new SQLiteDatabase(SPWorldsPayClient.MOD_ID, "spwp-cards", FabricLoader.getInstance().getConfigDir().toString());
         database.executeCommand("CREATE TABLE IF NOT EXISTS spCards (rowId INTEGER NOT NULL PRIMARY KEY, name TEXT, id TEXT, token TEXT)", false);
         database.executeCommand("CREATE TABLE IF NOT EXISTS spmCards (rowId INTEGER NOT NULL PRIMARY KEY, name TEXT, id TEXT, token TEXT)", false);
-        database.executeCommand("CREATE TABLE IF NOT EXISTS pooplandCards (rowId INTEGER NOT NULL PRIMARY KEY, name TEXT, id TEXT, token TEXT)", true);
     }
 
     public List<DatabaseCard> getSpCards() {
@@ -54,34 +53,12 @@ public class DatabaseWrapper {
         }
     }
 
-    public List<DatabaseCard> getPooplandCards() {
-        try {
-            PreparedStatement statement = database.executeCommand("SELECT * FROM pooplandCards ORDER BY rowId", false);
-            ResultSet result = statement.getResultSet();
-            List<DatabaseCard> cardList = new ArrayList<>();
-
-            while (result.next()) {
-                cardList.add(new DatabaseCard(result.getInt("rowId"), new Card(result.getString("name"), result.getString("id"), result.getString("token"))));
-            }
-
-            statement.close();
-
-            return cardList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void addSpCard(Card card) {
         database.executeCommand("INSERT INTO spCards (name, id, token) VALUES (?, ?, ?)", true, card.name(), card.id(), card.token());
     }
 
     public void addSpmCard(Card card) {
         database.executeCommand("INSERT INTO spmCards (name, id, token) VALUES (?, ?, ?)", true, card.name(), card.id(), card.token());
-    }
-
-    public void addPooplandCard(Card card) {
-        database.executeCommand("INSERT INTO pooplandCards (name, id, token) VALUES (?, ?, ?)", true, card.name(), card.id(), card.token());
     }
 
     public DatabaseCard getSpCard(int index) {
@@ -120,24 +97,6 @@ public class DatabaseWrapper {
         }
     }
 
-    public DatabaseCard getPooplandCard(int index) {
-        try {
-            PreparedStatement statement = database.executeCommand("SELECT * FROM pooplandCards WHERE rowId = ?", false, index);
-            ResultSet result = statement.getResultSet();
-            DatabaseCard card = null;
-
-            while (result.next()) {
-                card = new DatabaseCard(result.getInt("rowId"), new Card(result.getString("name"), result.getString("id"), result.getString("token")));
-            }
-
-            statement.close();
-
-            return card;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public void editSpCard(String newName, int index) {
         database.executeCommand("UPDATE spCards SET name = ? WHERE rowId = ?", true, newName, index);
     }
@@ -146,19 +105,11 @@ public class DatabaseWrapper {
         database.executeCommand("UPDATE spmCards SET name = ? WHERE rowId = ?", true, newName, index);
     }
 
-    public void editPooplandCard(String newName, int index) {
-        database.executeCommand("UPDATE pooplandCards SET name = ? WHERE rowId = ?", true, newName, index);
-    }
-
     public void deleteSpCard(int index) {
         database.executeCommand("DELETE FROM spCards WHERE rowId = ?", true, index);
     }
 
     public void deleteSpmCard(int index) {
         database.executeCommand("DELETE FROM spmCards WHERE rowId = ?", true, index);
-    }
-
-    public void deletePooplandCard(int index) {
-        database.executeCommand("DELETE FROM pooplandCards WHERE rowId = ?", true, index);
     }
 }

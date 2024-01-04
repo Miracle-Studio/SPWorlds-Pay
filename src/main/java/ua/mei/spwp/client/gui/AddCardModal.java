@@ -51,7 +51,6 @@ public class AddCardModal extends BaseOwoScreen<FlowLayout> {
                                             switch (SPMath.server()) {
                                                 case SP -> SPWorldsPayClient.database.addSpCard(this.newCard);
                                                 case SPm -> SPWorldsPayClient.database.addSpmCard(this.newCard);
-                                                case PoopLand -> SPWorldsPayClient.database.addPooplandCard(this.newCard);
                                             }
                                             MinecraftClient.getInstance().setScreen(null);
                                         }).horizontalSizing(Sizing.fill(47)))
