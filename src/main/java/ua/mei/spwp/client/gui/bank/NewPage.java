@@ -10,13 +10,13 @@ import org.jetbrains.annotations.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.*;
 import ua.mei.spwp.client.gui.components.*;
-import ua.mei.spwp.util.*;
 
 public class NewPage extends BaseOwoScreen<FlowLayout> {
     public Server server = Server.SP;
     public DatabaseCard card = null;
 
     public int oldGuiScale;
+    public boolean closing = false;
 
     public NewPage() {
         this.oldGuiScale = MinecraftClient.getInstance().options.getGuiScale().getValue();
@@ -35,6 +35,8 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
 
     @Override
     public void close() {
+        this.closing = true;
+
         MinecraftClient.getInstance().options.getGuiScale().setValue(this.oldGuiScale);
         MinecraftClient.getInstance().onResolutionChanged();
 

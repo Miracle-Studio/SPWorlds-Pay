@@ -3,6 +3,7 @@
   "package": "ua.mei.spwp.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "MinecraftClientMixin",
     "ScrollContainerAccessor",
     "SplashTextResourceSupplierMixin"
   ],
