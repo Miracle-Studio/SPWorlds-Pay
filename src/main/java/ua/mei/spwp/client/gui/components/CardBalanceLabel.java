@@ -20,7 +20,8 @@ public class CardBalanceLabel extends LabelComponent {
                 this.text = Text.translatable("gui.spwp.description.balance").append(String.valueOf((int) result));
             } else {
                 this.text = Text.translatable("gui.spwp.description.balance_error");
-                this.color(Color.ofArgb(0xFFCC2929));
+                this.tooltip(Text.translatable("gui.spwp.description.ddos_error"));
+                this.color(Color.ofArgb(0xFFFF3333));
             }
 
             this.notifyParentIfMounted();
