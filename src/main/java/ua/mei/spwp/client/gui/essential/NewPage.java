@@ -1,4 +1,4 @@
-package ua.mei.spwp.client.gui.bank;
+package ua.mei.spwp.client.gui.essential;
 
 import io.wispforest.owo.ui.base.*;
 import io.wispforest.owo.ui.component.*;
@@ -8,8 +8,8 @@ import net.minecraft.client.*;
 import net.minecraft.text.*;
 import org.jetbrains.annotations.*;
 import ua.mei.spwp.api.types.*;
-import ua.mei.spwp.client.gui.*;
-import ua.mei.spwp.client.gui.components.*;
+import ua.mei.spwp.client.gui.essential.components.*;
+import ua.mei.spwp.util.*;
 
 public class NewPage extends BaseOwoScreen<FlowLayout> {
     public Server server = Server.SP;
@@ -20,6 +20,11 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
 
     public NewPage() {
         this.oldGuiScale = MinecraftClient.getInstance().options.getGuiScale().getValue();
+    }
+
+    public NewPage(Server server) {
+        this.oldGuiScale = MinecraftClient.getInstance().options.getGuiScale().getValue();
+        this.server = server;
     }
 
     @Override
@@ -49,7 +54,7 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
             this.card = card;
         }));
 
-        ServerList serverList = new ServerList(server -> {
+        ServerList serverList = new ServerList(this.server, server -> {
             this.card = null;
             this.server = server;
 

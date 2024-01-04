@@ -1,4 +1,4 @@
-package ua.mei.spwp.client.gui.components;
+package ua.mei.spwp.client.gui.essential.components;
 
 import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.core.*;
@@ -20,7 +20,6 @@ public class CardBalanceLabel extends LabelComponent {
                 this.text = Text.translatable("gui.spwp.description.balance").append(String.valueOf((int) result));
             } else {
                 this.text = Text.translatable("gui.spwp.description.balance_error");
-                this.tooltip(Text.translatable("gui.spwp.description.ddos_error"));
                 this.color(Color.ofArgb(0xFFFF3333));
             }
 

@@ -1,4 +1,4 @@
-package ua.mei.spwp.client.gui.components;
+package ua.mei.spwp.client.gui.essential.components;
 
 import com.mojang.blaze3d.systems.*;
 import io.wispforest.owo.mixin.ui.access.*;

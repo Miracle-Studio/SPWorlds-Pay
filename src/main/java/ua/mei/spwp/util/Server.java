@@ -1,4 +1,4 @@
-package ua.mei.spwp.client.gui;
+package ua.mei.spwp.util;
 
 public enum Server {
     SP,

@@ -1,4 +1,4 @@
-package ua.mei.spwp.client.gui.components;
+package ua.mei.spwp.client.gui.essential.components;
 
 import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.core.*;
@@ -6,7 +6,6 @@ import net.minecraft.client.*;
 import net.minecraft.client.sound.*;
 import net.minecraft.sound.*;
 import net.minecraft.text.*;
-import ua.mei.spwp.client.gui.*;
 
 import java.util.function.*;
 

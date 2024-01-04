@@ -18,8 +18,8 @@ import net.minecraft.util.*;
 import org.lwjgl.glfw.*;
 import org.slf4j.*;
 import ua.mei.spwp.api.types.*;
-import ua.mei.spwp.client.gui.*;
-import ua.mei.spwp.client.gui.bank.*;
+import ua.mei.spwp.client.gui.essential.*;
+import ua.mei.spwp.client.gui.old.*;
 import ua.mei.spwp.config.*;
 import ua.mei.spwp.util.*;
 
@@ -60,7 +60,7 @@ public class SPWorldsPayClient implements ClientModInitializer {
                 } else {
                     MessageScreen.openMessage(Text.translatable("gui.spwp.title.error"), Text.translatable("gui.spwp.description.join_to_server"));
                 } */
-                MinecraftClient.getInstance().setScreen(new NewPage());
+                MinecraftClient.getInstance().setScreen(new NewPage(Server.SPm));
             }
         });
 
@@ -101,7 +101,7 @@ public class SPWorldsPayClient implements ClientModInitializer {
                             String cardToken = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(0).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
 
                             Card newCard = new Card(cardName, cardId, cardToken);
-                            MinecraftClient.getInstance().setScreen(new AddCardModal(newCard));
+                            MinecraftClient.getInstance().setScreen(new EssentialAddCardModal(newCard));
                         } catch (NullPointerException ignored) {
                             // Если игроки додумаются каким-то способом обойти проверку
                             // на реальное сообщение с токеном и айди, то майнкрафт не крашило

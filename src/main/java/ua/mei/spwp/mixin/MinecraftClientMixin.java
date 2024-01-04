@@ -6,7 +6,7 @@ import org.jetbrains.annotations.*;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.*;
-import ua.mei.spwp.client.gui.bank.*;
+import ua.mei.spwp.client.gui.essential.*;
 
 @Mixin(MinecraftClient.class)
 public class MinecraftClientMixin {

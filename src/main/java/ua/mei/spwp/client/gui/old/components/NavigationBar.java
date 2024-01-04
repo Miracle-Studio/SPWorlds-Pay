@@ -1,4 +1,4 @@
-package ua.mei.spwp.client.gui.components;
+package ua.mei.spwp.client.gui.old.components;
 
 import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.container.*;
@@ -7,7 +7,7 @@ import net.fabricmc.loader.api.*;
 import net.minecraft.client.*;
 import net.minecraft.text.*;
 import ua.mei.spwp.client.*;
-import ua.mei.spwp.client.gui.bank.*;
+import ua.mei.spwp.client.gui.old.*;
 
 import java.util.*;
 

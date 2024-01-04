@@ -1,4 +1,4 @@
-package ua.mei.spwp.client.gui;
+package ua.mei.spwp.client.gui.essential;
 
 public class EssentialColorScheme {
     public static final int BACKGROUND = 0xFF181818;

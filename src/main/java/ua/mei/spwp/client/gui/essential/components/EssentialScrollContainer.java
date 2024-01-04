@@ -1,4 +1,4 @@
-package ua.mei.spwp.client.gui.components;
+package ua.mei.spwp.client.gui.essential.components;
 
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;

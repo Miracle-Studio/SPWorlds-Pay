@@ -1,9 +1,10 @@
-package ua.mei.spwp.client.gui.components;
+package ua.mei.spwp.client.gui.essential.components;
 
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.text.*;
-import ua.mei.spwp.client.gui.*;
+import ua.mei.spwp.client.gui.essential.*;
+import ua.mei.spwp.util.*;
 
 import java.util.*;
 import java.util.function.*;
@@ -12,10 +13,12 @@ public class ServerList extends FlowLayout {
     public List<TransparentButton> tabList = new ArrayList<>();
 
     public Consumer<Server> onChange;
+    public Server server;
 
-    public ServerList(Consumer<Server> onChange) {
+    public ServerList(Server server, Consumer<Server> onChange) {
         super(Sizing.content(), Sizing.content(), Algorithm.HORIZONTAL);
         this.onChange = onChange;
+        this.server = server;
         this.gap(13);
 
         initTabs();
@@ -29,8 +32,7 @@ public class ServerList extends FlowLayout {
             TransparentButton button = new TransparentButton(Text.literal(server.name()), EssentialColorScheme.TAB_TEXT, EssentialColorScheme.HOVERED_TAB_TEXT, EssentialColorScheme.SELECTED_TAB_TEXT, btn -> {});
             button.shadow(true);
 
-            if (tabList.isEmpty()) {
-                this.onChange.accept(server);
+            if (server == this.server) {
                 button.selected = true;
             }
 

@@ -2,7 +2,6 @@ package ua.mei.spwp.util;
 
 import net.minecraft.client.*;
 import net.minecraft.client.network.*;
-import ua.mei.spwp.client.gui.*;
 
 public class SPMath {
     public static Server server() {

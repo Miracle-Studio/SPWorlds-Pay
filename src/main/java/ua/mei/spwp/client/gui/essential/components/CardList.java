@@ -1,11 +1,11 @@
-package ua.mei.spwp.client.gui.components;
+package ua.mei.spwp.client.gui.essential.components;
 
 import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.*;
-import ua.mei.spwp.client.gui.*;
+import ua.mei.spwp.util.*;
 
 import java.util.*;
 import java.util.function.*;

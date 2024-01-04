@@ -3,8 +3,7 @@ package ua.mei.spwp.api;
 import com.google.gson.*;
 import net.minecraft.text.*;
 import ua.mei.spwp.api.types.*;
-import ua.mei.spwp.client.*;
-import ua.mei.spwp.client.gui.*;
+import ua.mei.spwp.client.gui.essential.*;
 
 import java.net.*;
 import java.net.http.*;
@@ -40,7 +39,7 @@ public class SPWorldsApi {
             HttpResponse<String> response = httpClient.send(requestBuilder.build(), HttpResponse.BodyHandlers.ofString());
             return gson.fromJson(response.body(), JsonObject.class);
         } catch (Exception e) {
-            MessageModal.openMessage(Text.translatable("gui.spwp.title.error"), Text.literal(e.getMessage()));
+            EssentialMessageModal.openMessage(Text.translatable("gui.spwp.title.error"), Text.literal(e.getMessage()));
             return null;
         }
     }
