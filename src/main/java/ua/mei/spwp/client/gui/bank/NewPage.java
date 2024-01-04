@@ -18,8 +18,8 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
 
     public int oldGuiScale;
 
-    public NewPage(int oldGuiScale) {
-        this.oldGuiScale = oldGuiScale;
+    public NewPage() {
+        this.oldGuiScale = MinecraftClient.getInstance().options.getGuiScale().getValue();
     }
 
     @Override

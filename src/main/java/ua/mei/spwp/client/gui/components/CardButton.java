@@ -7,7 +7,6 @@ import net.minecraft.client.*;
 import net.minecraft.client.sound.*;
 import net.minecraft.sound.*;
 import net.minecraft.text.*;
-import net.minecraft.util.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.gui.*;
 
@@ -30,15 +29,13 @@ public class CardButton extends FlowLayout {
         this.card = card;
 
         this.child(Containers.horizontalFlow(Sizing.fill(100), Sizing.content())
-                .child(Components.texture(new Identifier("spwp", "textures/card/moon.png"), 0, 0, 48, 24, 48, 24))
                 .child(Containers.verticalFlow(Sizing.content(), Sizing.content())
                         .child(Components.label(Text.literal(card.card().name())).color(Color.ofArgb(EssentialColorScheme.MODAL_TEXT)).shadow(true))
-                        .child(Components.label(Text.literal("Баланс: 69")).color(Color.ofArgb(0xFF747474)).shadow(false))
+                        .child(new CardBalanceLabel(card).color(Color.ofArgb(0xFF747474)).shadow(false))
                         .gap(4)
                         .margins(Insets.top(2))
                         .verticalAlignment(VerticalAlignment.CENTER)
                 )
-                .gap(8)
                 .margins(Insets.both(10, 8))
         );
 

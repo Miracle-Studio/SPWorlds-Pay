@@ -3,6 +3,7 @@ package ua.mei.spwp.api;
 import com.google.gson.*;
 import net.minecraft.text.*;
 import ua.mei.spwp.api.types.*;
+import ua.mei.spwp.client.*;
 import ua.mei.spwp.client.gui.*;
 
 import java.net.*;

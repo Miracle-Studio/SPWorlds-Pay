@@ -60,8 +60,7 @@ public class SPWorldsPayClient implements ClientModInitializer {
                 } else {
                     MessageScreen.openMessage(Text.translatable("gui.spwp.title.error"), Text.translatable("gui.spwp.description.join_to_server"));
                 } */
-                int oldGuiScale = MinecraftClient.getInstance().options.getGuiScale().getValue();
-                MinecraftClient.getInstance().setScreen(new NewPage(oldGuiScale));
+                MinecraftClient.getInstance().setScreen(new NewPage());
             }
         });
 
