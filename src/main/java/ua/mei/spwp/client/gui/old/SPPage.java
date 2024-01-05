@@ -12,7 +12,6 @@ import org.jetbrains.annotations.*;
 import ua.mei.spwp.api.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.*;
-import ua.mei.spwp.client.gui.essential.*;
 import ua.mei.spwp.client.gui.old.components.*;
 
 import java.util.*;
@@ -47,7 +46,7 @@ public class SPPage extends BaseOwoScreen<FlowLayout> {
 
         ButtonComponent deleteButton = Components.button(Text.translatable("gui.spwp.button.delete"), button -> {
             SPWorldsPayClient.database.deleteSpCard(this.cardForEdit.rowId());
-            EssentialMessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.card").append(this.cardForEdit.card().name()).append(Text.translatable("gui.spwp.description.card_deleted")));
+            OldMessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.card").append(this.cardForEdit.card().name()).append(Text.translatable("gui.spwp.description.card_deleted")));
         });
         deleteButton.horizontalSizing(Sizing.fill(100));
         deleteButton.active(false);
@@ -56,7 +55,7 @@ public class SPPage extends BaseOwoScreen<FlowLayout> {
 
         ButtonComponent saveButton = Components.button(Text.translatable("gui.spwp.button.save"), button -> {
             SPWorldsPayClient.database.editSpCard(cardName.getText(), this.cardForEdit.rowId());
-            EssentialMessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.card").append(this.cardForEdit.card().name()).append(Text.translatable("gui.spwp.description.card_edited")).append(cardName.getText() + "!"));
+            OldMessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.card").append(this.cardForEdit.card().name()).append(Text.translatable("gui.spwp.description.card_edited")).append(cardName.getText() + "!"));
         });
         saveButton.horizontalSizing(Sizing.fill(100));
         saveButton.active(false);
@@ -173,7 +172,7 @@ public class SPPage extends BaseOwoScreen<FlowLayout> {
             } else {
                 SPWorldsApi.transfer(this.selectedCard, new Transaction(cardNumber.getText(), Integer.parseInt(amount.getText()), comment.getText().isEmpty() ? "Нет комментария" : comment.getText()));
             }
-            EssentialMessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.successfully_sent").append(this.selectedCard.name() + " " + amount.getText()).append(Text.translatable("gui.spwp.description.diamonds_to_the_card")).append(cardNumber.getText()));
+            OldMessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.successfully_sent").append(this.selectedCard.name() + " " + amount.getText()).append(Text.translatable("gui.spwp.description.diamonds_to_the_card")).append(cardNumber.getText()));
         });
 
         cardNumber.onChanged().subscribe((string) -> {

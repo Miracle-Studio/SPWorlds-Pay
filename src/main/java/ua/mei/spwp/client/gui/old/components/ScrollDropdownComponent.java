@@ -120,15 +120,6 @@ public class ScrollDropdownComponent extends FlowLayout {
         return this;
     }
 
-    public void removeEntries() {
-        FlowLayout dropdownLayout = ((FlowLayout) expandableDropdown.children().get(0));
-        dropdownLayout.clearChildren();
-    }
-
-    public boolean expanded() {
-        return expanded;
-    }
-
     public void expanded(boolean value) {
         expanded = value;
         updateExpandableDropdown();

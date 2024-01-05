@@ -43,5 +43,7 @@
   "gui.spwp.input.transfer.comment": "Comment",
   "gui.spwp.input.edit_card.placeholder": "Choose card",
 
-  "key.spwp.open_wallet_screen": "Open wallet screen"
+  "key.spwp.open_wallet_screen": "Open wallet screen",
+
+  "modmenu.descriptionTranslation.spwp": "Мод, позволяющий удобнее управлять своими картами на СП/СПм, прямо в майнкрафте"
 }

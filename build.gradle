@@ -14,6 +14,9 @@ repositories {
     // for more information about repositories.
     maven { url "https://maven.wispforest.io" }
     maven { url "https://api.modrinth.com/maven" }
+    maven { url "https://maven.isxander.dev/releases" }
+    maven { url "https://maven.terraformersmc.com" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     mavenCentral()
 }
 
@@ -30,10 +33,10 @@ dependencies {
     modImplementation "io.wispforest:owo-lib:${project.owo_version}"
     annotationProcessor "io.wispforest:owo-lib:${project.owo_version}"
     include "io.wispforest:owo-lib:${project.owo_version}"
-
     modImplementation include("maven.modrinth:sqlib:${project.sqlib_version}")
-
     modImplementation include("net.kyori:adventure-platform-fabric:${project.kyori_version}")
+    modImplementation include("dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}")
+    modImplementation include("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 processResources {
