@@ -46,7 +46,7 @@ public class EssentialMessageModal extends BaseOwoScreen<FlowLayout> {
                                         )
                                         .gap(13)
                                 )
-                                .child(new EssentialButton(Text.translatable("gui.spwp.button.ok"), button -> {
+                                .child(new EssentialBlueButton(Text.translatable("gui.spwp.button.ok"), button -> {
                                     MinecraftClient.getInstance().setScreen(null);
                                 }).horizontalSizing(Sizing.fill(100)))
                                 .gap(18)

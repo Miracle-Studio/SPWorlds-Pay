@@ -167,11 +167,13 @@ public class SPMPage extends BaseOwoScreen<FlowLayout> {
 
         ButtonComponent transferButton = Components.button(Text.translatable("gui.spwp.button.transfer"), button -> {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
+
             if (player != null) {
                 SPWorldsApi.transfer(this.selectedCard, new Transaction(cardNumber.getText(), Integer.parseInt(amount.getText()), comment.getText().isEmpty() ? "Нет комментария - " + player.getGameProfile().getName() : comment.getText() + " - " + player.getGameProfile().getName()));
             } else {
                 SPWorldsApi.transfer(this.selectedCard, new Transaction(cardNumber.getText(), Integer.parseInt(amount.getText()), comment.getText().isEmpty() ? "Нет комментария" : comment.getText()));
             }
+
             OldMessageModal.openMessage(Text.translatable("gui.spwp.title.success"), Text.translatable("gui.spwp.description.successfully_sent").append(this.selectedCard.name() + " " + amount.getText()).append(Text.translatable("gui.spwp.description.diamonds_to_the_card")).append(cardNumber.getText()));
         });
 

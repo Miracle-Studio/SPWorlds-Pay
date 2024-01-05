@@ -14,8 +14,6 @@ public class CardBalanceLabel extends LabelComponent {
         SPWorldsPayClient.asyncTasksService.addTask(() -> {
             return SPWorldsApi.getBalance(card.card());
         }, result -> {
-            SPWorldsPayClient.LOGGER.info(String.valueOf((int) result));
-
             if ((int) result != -5298) {
                 this.text = Text.translatable("gui.spwp.description.balance").append(String.valueOf((int) result));
             } else {

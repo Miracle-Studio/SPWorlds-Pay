@@ -16,4 +16,8 @@ public class EssentialColorScheme {
     public static final int MODAL_OUTLINE = 0xFF474747;
 
     public static final int BORDER = 0xFF232323;
+
+    public static final int INPUT_PLACEHOLDER = 0xFFBFBFBF;
+
+    public static final int INPUT_TEXT = 0xFFE2E2E2;
 }
