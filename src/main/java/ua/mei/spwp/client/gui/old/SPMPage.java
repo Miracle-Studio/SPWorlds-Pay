@@ -36,68 +36,6 @@ public class SPMPage extends BaseOwoScreen<FlowLayout> {
         return OwoUIAdapter.create(this, Containers::verticalFlow);
     }
 
-    protected FlowLayout addCardOverlay(OverlayContainer<Component> overlay) {
-        TextBoxComponent cardName = Components.textBox(Sizing.fill(100));
-        cardName.margins(Insets.top(4).add(0, 6, 0, 0));
-        cardName.setMaxLength(12);
-
-        TextBoxComponent cardID = Components.textBox(Sizing.fill(100));
-        cardID.margins(Insets.top(4).add(0, 6, 0, 0));
-        cardID.setMaxLength(36);
-
-        TextBoxComponent cardToken = Components.textBox(Sizing.fill(100));
-        cardToken.margins(Insets.top(4).add(0, 6, 0, 0));
-        cardToken.setMaxLength(32);
-
-        FlowLayout overlayLayout = Containers.verticalFlow(Sizing.fill(100), Sizing.fill(100));
-        overlayLayout.child(Containers.verticalFlow(Sizing.fill(30), Sizing.content())
-                .child(Containers.verticalFlow(Sizing.fill(100), Sizing.content())
-                        .child(Components.label(Text.translatable("gui.spwp.title.add_spm_card")).margins(Insets.top(2)))
-                        .child(Components.label(Text.translatable("gui.spwp.input.card_name")).horizontalTextAlignment(HorizontalAlignment.LEFT).horizontalSizing(Sizing.fill(100)).margins(Insets.top(16)))
-                        .child(cardName)
-                        .child(Components.label(Text.translatable("gui.spwp.input.card_id")).horizontalTextAlignment(HorizontalAlignment.LEFT).horizontalSizing(Sizing.fill(100)))
-                        .child(cardID)
-                        .child(Components.label(Text.translatable("gui.spwp.input.card_token")).horizontalTextAlignment(HorizontalAlignment.LEFT).horizontalSizing(Sizing.fill(100)))
-                        .child(cardToken)
-                        .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.content())
-                                .child(Components.button(Text.translatable("gui.spwp.button.back"), button -> {
-                                    overlay.remove();
-                                }).horizontalSizing(Sizing.fill(48)))
-                                .child(Containers.verticalFlow(Sizing.fill(4), Sizing.content()))
-                                .child(Components.button(Text.translatable("gui.spwp.button.add"), button -> {
-                                    Card newCard = new Card(cardName.getText(), cardID.getText(), cardToken.getText());
-
-                                    SPWorldsPayClient.asyncTasksService.addTask(() -> {
-                                        return SPWorldsApi.getBalance(newCard);
-                                    }, result -> {
-                                        if ((int) result != -5298) {
-                                            SPWorldsPayClient.database.addSpmCard(newCard);
-                                            MinecraftClient.getInstance().setScreen(new SPMPage());
-                                        } else {
-                                            MinecraftClient.getInstance().setScreen(new EssentialMessageModal(Text.translatable("gui.spwp.title.error"), Text.translatable("gui.spwp.description.ddos_error")));
-                                        }
-                                    }, exception -> {
-
-                                    });
-                                }).horizontalSizing(Sizing.fill(48)))
-                                .horizontalAlignment(HorizontalAlignment.CENTER)
-                                .verticalAlignment(VerticalAlignment.CENTER)
-                        )
-                        .margins(Insets.of(8))
-                        .horizontalAlignment(HorizontalAlignment.CENTER)
-                        .verticalAlignment(VerticalAlignment.CENTER)
-                )
-                .horizontalAlignment(HorizontalAlignment.CENTER)
-                .verticalAlignment(VerticalAlignment.CENTER)
-                .surface(Surface.DARK_PANEL)
-        );
-        overlayLayout.horizontalAlignment(HorizontalAlignment.CENTER);
-        overlayLayout.verticalAlignment(VerticalAlignment.CENTER);
-        overlayLayout.surface(Surface.flat(0x32000000));
-
-        return overlayLayout;
-    }
-
     protected FlowLayout editCardsOverlay(OverlayContainer<Component> overlay) {
         TextBoxComponent cardName = Components.textBox(Sizing.fill(100));
         cardName.margins(Insets.top(4));
@@ -204,19 +142,10 @@ public class SPMPage extends BaseOwoScreen<FlowLayout> {
     protected void build(FlowLayout rootComponent) {
         ScrollDropdownComponent dropdownComponent = new ScrollDropdownComponent(Sizing.fill(100), Sizing.fill(100), this.selectedCard == null ? Text.translatable("gui.spwp.description.choose_card") : Text.literal(this.selectedCard.name()), false);
 
-        OverlayContainer<Component> addCardOverlay = Containers.overlay(Containers.verticalFlow(Sizing.fill(0), Sizing.fill(0)));
-        addCardOverlay.child(addCardOverlay(addCardOverlay));
-        addCardOverlay.zIndex(100);
-        addCardOverlay.closeOnClick(false);
-
         OverlayContainer<Component> editCardsOverlay = Containers.overlay(Containers.verticalFlow(Sizing.fill(0), Sizing.fill(0)));
         editCardsOverlay.child(editCardsOverlay(editCardsOverlay));
         editCardsOverlay.zIndex(200);
         editCardsOverlay.closeOnClick(false);
-
-        dropdownComponent.button(Text.translatable("gui.spwp.button.add_spm_card"), button -> {
-            rootComponent.child(addCardOverlay);
-        });
 
         dropdownComponent.button(Text.translatable("gui.spwp.button.edit"), button -> {
             rootComponent.child(editCardsOverlay);

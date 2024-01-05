@@ -34,8 +34,6 @@
   "gui.spwp.button.add": "+ Add",
   "gui.spwp.button.transfer": "⇄ Transfer",
   "gui.spwp.button.edit": "✎ Edit",
-  "gui.spwp.button.add_sp_card": "+ Add SP card",
-  "gui.spwp.button.add_spm_card": "+ Add SPm card",
 
   "gui.spwp.input.card_name": "Card name",
   "gui.spwp.input.card_id": "Card ID",

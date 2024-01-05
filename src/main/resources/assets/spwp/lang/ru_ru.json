@@ -34,8 +34,6 @@
   "gui.spwp.button.add": "+ Добавить",
   "gui.spwp.button.transfer": "⇄ Перевести",
   "gui.spwp.button.edit": "✎ Редактировать",
-  "gui.spwp.button.add_sp_card": "+ Добавить карту СП",
-  "gui.spwp.button.add_spm_card": "+ Добавить карту СПм",
 
   "gui.spwp.input.card_name": "Название карты",
   "gui.spwp.input.card_id": "Айди карты",
