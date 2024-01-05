@@ -30,9 +30,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // APIs.
-    modImplementation "io.wispforest:owo-lib:${project.owo_version}"
-    annotationProcessor "io.wispforest:owo-lib:${project.owo_version}"
-    include "io.wispforest:owo-lib:${project.owo_version}"
+    modImplementation include("io.wispforest:owo-lib:${project.owo_version}")
     modImplementation include("maven.modrinth:sqlib:${project.sqlib_version}")
     modImplementation include("net.kyori:adventure-platform-fabric:${project.kyori_version}")
     modImplementation include("dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}")

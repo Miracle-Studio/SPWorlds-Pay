@@ -18,6 +18,9 @@
   "entrypoints": {
     "client": [
       "ua.mei.spwp.client.SPWorldsPayClient"
+    ],
+    "modmenu": [
+      "ua.mei.spwp.config.ModMenuIntegration"
     ]
   },
   "custom": {
@@ -35,5 +38,9 @@
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.20"
+  },
+  "suggests": {
+    "modmenu": ">=7.0.0",
+    "yacl": ">=3.2.1"
   }
 }

@@ -26,7 +26,6 @@ import ua.mei.spwp.util.*;
 import java.util.concurrent.*;
 
 public class SPWorldsPayClient implements ClientModInitializer {
-    // public static final ua.mei.spwp.config.SPWorldsPayConfig config = ua.mei.spwp.config.SPWorldsPayConfig.createAndLoad();
     public static final DatabaseWrapper database = new DatabaseWrapper();
     public static final AsyncTasksService asyncTasksService = new AsyncTasksService(Executors.newCachedThreadPool());
     public static final String MOD_ID = "spwp";
@@ -35,6 +34,8 @@ public class SPWorldsPayClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        SPWorldsPayConfig.load();
+
         bankGuiKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.spwp.open_wallet_screen", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "SPWorlds Pay"));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -49,18 +50,19 @@ public class SPWorldsPayClient implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (bankGuiKeyBinding.wasPressed()) {
-                /* if (MinecraftClient.getInstance().getCurrentServerEntry() != null) {
-                    if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru")) {
-                        MinecraftClient.getInstance().setScreen(new SPPage());
-                    } else if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru")) {
-                        MinecraftClient.getInstance().setScreen(new SPMPage());
+                Server server = SPMath.server();
+
+                if (server != Server.OTHER) {
+                    if (SPWorldsPayConfig.getConfig().theme == Theme.Essential) {
+                        MinecraftClient.getInstance().setScreen(new NewPage(server));
                     } else {
-                        MessageScreen.openMessage(Text.translatable("gui.spwp.title.error"), Text.translatable("gui.spwp.description.join_to_server"));
+                        if (server == Server.SP) {
+                            MinecraftClient.getInstance().setScreen(new SPPage());
+                        } else {
+                            MinecraftClient.getInstance().setScreen(new SPMPage());
+                        }
                     }
-                } else {
-                    MessageScreen.openMessage(Text.translatable("gui.spwp.title.error"), Text.translatable("gui.spwp.description.join_to_server"));
-                } */
-                MinecraftClient.getInstance().setScreen(new NewPage(Server.SPm));
+                }
             }
         });
 
@@ -89,26 +91,30 @@ public class SPWorldsPayClient implements ClientModInitializer {
         });
 
         ClientReceiveMessageEvents.GAME.register(((message, overlay) -> {
-                if (SPMath.server() != Server.OTHER) {
-                    Gson gson = new Gson();
-                    JsonObject jsonMessage = gson.fromJson(GsonComponentSerializer.gson().serialize(message.asComponent()), JsonObject.class);
-                    String stringMessage = message.getString();
+            if (SPMath.server() != Server.OTHER) {
+                Gson gson = new Gson();
+                JsonObject jsonMessage = gson.fromJson(GsonComponentSerializer.gson().serialize(message.asComponent()), JsonObject.class);
+                String stringMessage = message.getString();
 
-                    if (stringMessage.startsWith("[") && (!stringMessage.startsWith("[СП]") || !stringMessage.startsWith("[СПм]")) && stringMessage.endsWith("] Управление картой [Копир. токен] [Копир. айди]")) {
-                        try {
-                            String cardName = jsonMessage.get("text").getAsString().replace("[", "").replace("] ", "");
-                            String cardId = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(1).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
-                            String cardToken = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(0).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
+                if (stringMessage.startsWith("[") && (!stringMessage.startsWith("[СП]") || !stringMessage.startsWith("[СПм]")) && stringMessage.endsWith("] Управление картой [Копир. токен] [Копир. айди]")) {
+                    try {
+                        String cardName = jsonMessage.get("text").getAsString().replace("[", "").replace("] ", "");
+                        String cardId = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(1).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
+                        String cardToken = jsonMessage.get("extra").getAsJsonArray().get(0).getAsJsonObject().get("extra").getAsJsonArray().get(0).getAsJsonObject().get("clickEvent").getAsJsonObject().get("value").getAsString();
 
-                            Card newCard = new Card(cardName, cardId, cardToken);
+                        Card newCard = new Card(cardName, cardId, cardToken);
+
+                        if (SPWorldsPayConfig.getConfig().theme == Theme.Essential) {
                             MinecraftClient.getInstance().setScreen(new EssentialAddCardModal(newCard));
-                        } catch (NullPointerException ignored) {
-                            // Если игроки додумаются каким-то способом обойти проверку
-                            // на реальное сообщение с токеном и айди, то майнкрафт не крашило
+                        } else {
+                            MinecraftClient.getInstance().setScreen(new OldAddCardModal(newCard));
                         }
+                    } catch (NullPointerException ignored) {
+                        // Если игроки додумаются каким-то способом обойти проверку
+                        // на реальное сообщение с токеном и айди, то майнкрафт не крашило
                     }
                 }
-
+            }
         }));
     }
 
@@ -116,10 +122,10 @@ public class SPWorldsPayClient implements ClientModInitializer {
         if (!signBlockEntity.getTextFacing(player).getMessage(0, false).getString().startsWith("#SPWP")) {
             return false;
         }
-        if (MinecraftClient.getInstance().getCurrentServerEntry() == null) {
-            return false;
-        }
-        if (!(MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru") || MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru"))) {
+
+        Server server = SPMath.server();
+
+        if (server == Server.OTHER) {
             return false;
         }
 
@@ -131,14 +137,13 @@ public class SPWorldsPayClient implements ClientModInitializer {
             if (amount > 0 && cardNumber.matches("[0-9]+") && cardNumber.length() == 5) {
                 Transaction transaction = new Transaction(cardNumber, amount, comment);
 
-                if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("sp.spworlds.ru")) {
+                if (server == Server.SP) {
                     MinecraftClient.getInstance().setScreen(new SPPage(transaction));
-                    return true;
-                } else if (MinecraftClient.getInstance().getCurrentServerEntry().address.equals("spm.spworlds.ru")) {
+                } else {
                     MinecraftClient.getInstance().setScreen(new SPMPage(transaction));
-                    return true;
-
                 }
+
+                return true;
             }
 
             return false;
