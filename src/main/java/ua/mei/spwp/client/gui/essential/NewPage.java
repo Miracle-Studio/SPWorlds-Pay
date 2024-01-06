@@ -20,9 +20,17 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
     public int oldGuiScale;
     public boolean closing = false;
 
+    public Transaction transaction;
+
     public NewPage(Server server) {
         this.oldGuiScale = MinecraftClient.getInstance().options.getGuiScale().getValue();
         this.server = server;
+    }
+
+    public NewPage(Server server, Transaction transaction) {
+        this.oldGuiScale = MinecraftClient.getInstance().options.getGuiScale().getValue();
+        this.server = server;
+        this.transaction = transaction;
     }
 
     @Override
@@ -72,14 +80,17 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
         });
         serverList.padding(Insets.of(10, 10, 12, 12));
 
-        EssentialTextBox number = new EssentialTextBox(Sizing.fill(100), Text.literal("Введите номер"));
+        EssentialTextBox number = new EssentialTextBox(Sizing.fill(100), Text.translatable("gui.spwp.input.transfer.card_number"));
         number.textBoxComponent.setMaxLength(5);
-        EssentialTextBox amount = new EssentialTextBox(Sizing.fill(100), Text.literal("Введите сумму"));
+        number.textBoxComponent.text(this.transaction == null ? "" : String.valueOf(this.transaction.receiver()));
+        EssentialTextBox amount = new EssentialTextBox(Sizing.fill(100), Text.translatable("gui.spwp.input.transfer.amount"));
         amount.textBoxComponent.setMaxLength(6);
-        EssentialTextBox comment = new EssentialTextBox(Sizing.fill(100), Text.literal("Введите комментарий"));
+        amount.textBoxComponent.text(this.transaction == null ? "" : String.valueOf(this.transaction.amount()));
+        EssentialTextBox comment = new EssentialTextBox(Sizing.fill(100), Text.translatable("gui.spwp.input.transfer.comment"));
         comment.textBoxComponent.setMaxLength(45);
+        comment.textBoxComponent.text(this.transaction == null ? "" : this.transaction.comment());
 
-        EssentialFlatButton transferButton = new EssentialFlatButton(Text.literal("Перевести"), button -> {
+        EssentialFlatButton transferButton = new EssentialFlatButton(Text.translatable("gui.spwp.button.transfer"), button -> {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
 
             if (player != null) {
@@ -104,11 +115,11 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
         rootComponent.child(Containers.verticalFlow(Sizing.fill(85), Sizing.content())
                         .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(30))
                                 .child(Containers.horizontalFlow(Sizing.fill(25), Sizing.fill(100))
-                                        .child(Components.label(Text.literal("Кошелёк")).color(Color.ofArgb(EssentialColorScheme.SCREEN_TITLE)).shadow(true).margins(Insets.of(11, 0, 13, 0)))
+                                        .child(Components.label(Text.translatable("gui.spwp.title.cards")).color(Color.ofArgb(EssentialColorScheme.SCREEN_TITLE)).shadow(true).margins(Insets.of(11, 0, 13, 0)))
                                         .surface(EssentialSurface.ESSENTIAL_NAV_LEFT)
                                 )
                                 .child(Containers.horizontalFlow(Sizing.fill(75), Sizing.fill(100))
-                                        .child(Components.label(Text.literal("Переводы")).color(Color.ofArgb(EssentialColorScheme.SCREEN_TITLE)).shadow(true).margins(Insets.of(11, 0, 10, 0)))
+                                        .child(Components.label(Text.translatable("gui.spwp.title.transfer")).color(Color.ofArgb(EssentialColorScheme.SCREEN_TITLE)).shadow(true).margins(Insets.of(11, 0, 10, 0)))
                                         .surface(EssentialSurface.ESSENTIAL_NAV_RIGHT)
                                 )
                         )

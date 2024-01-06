@@ -8,6 +8,9 @@
   "gui.spwp.title.add_sp_card": "Добавить карту СП",
   "gui.spwp.title.add_spm_card": "Добавить карту СПм",
 
+  "gui.spwp.title.cards": "Карты",
+  "gui.spwp.title.transfer": "Переводы",
+
   "gui.spwp.description.want_add_card": "Вы точно хотите добавить карту: ",
   "gui.spwp.description.card": "Карта ",
   "gui.spwp.description.successfully_added": " была успешно добавлена!",
@@ -44,6 +47,10 @@
   "gui.spwp.input.edit_card.placeholder": "Выберите карту",
 
   "key.spwp.open_wallet_screen": "Открыть окно кошелька",
+
+  "config.spwp.category.main": "Главное",
+  "config.spwp.group.visual": "Внешний вид",
+  "config.spwp.option.theme": "Тема",
 
   "modmenu.descriptionTranslation.spwp": "Mod that allows you to manage your SP/SPm cards directly in Minecraft"
 }

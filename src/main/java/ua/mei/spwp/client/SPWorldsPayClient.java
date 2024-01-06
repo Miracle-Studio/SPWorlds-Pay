@@ -75,8 +75,10 @@ public class SPWorldsPayClient implements ClientModInitializer {
 
             if (block.getBlock() instanceof SignBlock || block.getBlock() instanceof WallSignBlock || block.getBlock() instanceof HangingSignBlock || block.getBlock() instanceof WallHangingSignBlock) {
                 SignBlockEntity signBlockEntity = (SignBlockEntity) world.getBlockEntity(hitResult.getBlockPos());
+
                 if (signBlockEntity != null) {
                     ClientPlayerEntity playerEntity = MinecraftClient.getInstance().player;
+
                     if (playerEntity != null) {
                         if (!playerEntity.input.sneaking) {
                             if (tryParseSignPayment(signBlockEntity, player)) {
@@ -134,13 +136,17 @@ public class SPWorldsPayClient implements ClientModInitializer {
             int amount = Integer.parseInt(signBlockEntity.getTextFacing(player).getMessage(2, false).getString());
             String comment = signBlockEntity.getTextFacing(player).getMessage(3, false).getString();
 
-            if (amount > 0 && cardNumber.matches("[0-9]+") && cardNumber.length() == 5) {
+            if (amount > 0 && cardNumber.length() == 5) {
                 Transaction transaction = new Transaction(cardNumber, amount, comment);
 
-                if (server == Server.SP) {
-                    MinecraftClient.getInstance().setScreen(new SPPage(transaction));
+                if (SPWorldsPayConfig.getConfig().theme == Theme.Essential) {
+                    MinecraftClient.getInstance().setScreen(new NewPage(server, transaction));
                 } else {
-                    MinecraftClient.getInstance().setScreen(new SPMPage(transaction));
+                    if (server == Server.SP) {
+                        MinecraftClient.getInstance().setScreen(new SPPage(transaction));
+                    } else {
+                        MinecraftClient.getInstance().setScreen(new SPMPage(transaction));
+                    }
                 }
 
                 return true;

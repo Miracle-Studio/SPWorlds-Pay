@@ -153,17 +153,17 @@ public class SPPage extends BaseOwoScreen<FlowLayout> {
         TextBoxComponent cardNumber = Components.textBox(Sizing.fill(100));
         cardNumber.margins(Insets.top(4).add(0, 6, 0, 0));
         cardNumber.setMaxLength(5);
-        cardNumber.text(transaction != null ? transaction.receiver() : "");
+        cardNumber.text(this.transaction != null ? this.transaction.receiver() : "");
 
         TextBoxComponent amount = Components.textBox(Sizing.fill(100));
         amount.margins(Insets.top(4).add(0, 6, 0, 0));
         amount.setMaxLength(6);
-        amount.text(transaction != null ? String.valueOf(transaction.amount()) : "");
+        amount.text(this.transaction != null ? String.valueOf(this.transaction.amount()) : "");
 
         TextBoxComponent comment = Components.textBox(Sizing.fill(100));
         comment.margins(Insets.top(4).add(0, 6, 0, 0));
         comment.setMaxLength(45);
-        comment.text(transaction != null ? transaction.comment() : "");
+        comment.text(this.transaction != null ? this.transaction.comment() : "");
 
         ButtonComponent transferButton = Components.button(Text.translatable("gui.spwp.button.transfer"), button -> {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
