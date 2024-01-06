@@ -19,7 +19,7 @@ public class SPWorldsPayConfig {
             ).build();
 
     @SerialEntry
-    public Theme theme = Theme.Essential;
+    public Theme theme = Theme.PlasmoVoice;
 
     public static SPWorldsPayConfig getConfig() {
         return CONFIG_CLASS_HANDLER.instance();

@@ -14,12 +14,12 @@ import net.minecraft.util.*;
 
 import java.util.function.*;
 
-public class EssentialButton extends ButtonComponent {
-    public static final Identifier ACTIVE_TEXTURE = new Identifier("spwp", "essential_button/active");
-    public static final Identifier HOVERED_TEXTURE = new Identifier("spwp", "essential_button/hovered");
-    public static final Identifier DISABLED_TEXTURE = new Identifier("spwp", "essential_button/disabled");
+public class EssentialRedButton extends ButtonComponent {
+    public static final Identifier ACTIVE_TEXTURE = new Identifier("spwp", "essential_red_button/active");
+    public static final Identifier HOVERED_TEXTURE = new Identifier("spwp", "essential_red_button/hovered");
+    public static final Identifier DISABLED_TEXTURE = new Identifier("spwp", "essential_red_button/disabled");
 
-    public EssentialButton(Text message, Consumer<ButtonComponent> onPress) {
+    public EssentialRedButton(Text message, Consumer<ButtonComponent> onPress) {
         super(message, onPress);
     }
 

@@ -14,15 +14,17 @@ public class CardList extends FlowLayout {
     public List<CardButton> cardList = new ArrayList<>();
 
     public Consumer<DatabaseCard> onChange;
+    public Consumer<DatabaseCard> onDelete;
     public Server server;
 
-    public CardList(Server server, Consumer<DatabaseCard> onChange) {
+    public CardList(Server server, Consumer<DatabaseCard> onChange, Consumer<DatabaseCard> onDelete) {
         super(Sizing.fill(100), Sizing.content(), Algorithm.VERTICAL);
 
         this.child(Components.box(Sizing.fill(100), Sizing.fixed(5)).color(Color.ofArgb(0x00000000)));
         this.margins(Insets.right(3));
 
         this.onChange = onChange;
+        this.onDelete = onDelete;
         this.server = server;
 
         initCards();
@@ -38,7 +40,7 @@ public class CardList extends FlowLayout {
         this.child(Components.box(Sizing.fill(100), Sizing.fixed(5)).color(Color.ofArgb(0x00000000)));
 
         for (DatabaseCard card : cards) {
-            CardButton cardButton = new CardButton(card, databaseCard -> {});
+            CardButton cardButton = new CardButton(card, databaseCard -> {}, delete -> { this.onDelete.accept(card); });
 
             if (cardList.isEmpty()) {
                 this.onChange.accept(card);

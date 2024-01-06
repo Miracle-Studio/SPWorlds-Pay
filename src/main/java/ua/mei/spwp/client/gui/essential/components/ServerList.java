@@ -29,7 +29,7 @@ public class ServerList extends FlowLayout {
         servers.remove(Server.OTHER);
 
         for (Server server : servers) {
-            TransparentButton button = new TransparentButton(Text.literal(server.name()), EssentialColorScheme.TAB_TEXT, EssentialColorScheme.HOVERED_TAB_TEXT, EssentialColorScheme.SELECTED_TAB_TEXT, btn -> {});
+            TransparentButton button = new TransparentButton(Text.translatable("gui.spwp.server." + server.name().toLowerCase()), EssentialColorScheme.TAB_TEXT, EssentialColorScheme.HOVERED_TAB_TEXT, EssentialColorScheme.SELECTED_TAB_TEXT, btn -> {});
             button.shadow(true);
 
             if (server == this.server) {

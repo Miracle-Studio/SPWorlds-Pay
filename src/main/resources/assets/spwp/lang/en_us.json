@@ -8,6 +8,9 @@
   "gui.spwp.title.add_sp_card": "Add SP card",
   "gui.spwp.title.add_spm_card": "Add SPm card",
 
+  "gui.spwp.server.sp": "SP",
+  "gui.spwp.server.spm": "SPm",
+
   "gui.spwp.title.cards": "Cards",
   "gui.spwp.title.transfer": "Transfer",
 
@@ -51,6 +54,8 @@
   "config.spwp.category.main": "Main",
   "config.spwp.group.visual": "Visual",
   "config.spwp.option.theme": "Theme",
+
+  "modal.spwp.delete_card.description": "Are you sure you want to delete card ",
 
   "modmenu.descriptionTranslation.spwp": "Мод, позволяющий удобнее управлять своими картами на СП/СПм, прямо в майнкрафте"
 }

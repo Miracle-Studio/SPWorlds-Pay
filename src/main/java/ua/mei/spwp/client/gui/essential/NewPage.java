@@ -10,6 +10,7 @@ import net.minecraft.text.*;
 import org.jetbrains.annotations.*;
 import ua.mei.spwp.api.*;
 import ua.mei.spwp.api.types.*;
+import ua.mei.spwp.client.*;
 import ua.mei.spwp.client.gui.essential.components.*;
 import ua.mei.spwp.util.*;
 
@@ -64,10 +65,57 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
         return false;
     }
 
+    public FlowLayout generateOverlay(OverlayContainer<Component> overlay) {
+        ParentComponent content = Containers.verticalFlow(Sizing.fill(20), Sizing.content())
+                .child(Containers.verticalFlow(Sizing.fill(100), Sizing.content())
+                        .child(Components.label(Text.translatable("modal.spwp.delete_card.description").append(this.card.card().name() + "?"))
+                                .color(Color.ofArgb(EssentialColorScheme.MODAL_TEXT))
+                                .horizontalTextAlignment(HorizontalAlignment.CENTER)
+                                .shadow(true)
+                                .horizontalSizing(Sizing.fill(100))
+                        )
+                        .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.content())
+                                .child(new EssentialButton(Text.translatable("gui.spwp.button.no"), button -> {
+                                    overlay.remove();
+                                }).horizontalSizing(Sizing.fill(47)))
+                                .child(new EssentialRedButton(Text.translatable("gui.spwp.button.delete"), button -> {
+                                    Server server = SPMath.server();
+
+                                    if (server != Server.OTHER) {
+                                        if (server == Server.SP) {
+                                            SPWorldsPayClient.database.deleteSpCard(this.card.rowId());
+                                        } else {
+                                            SPWorldsPayClient.database.deleteSpmCard(this.card.rowId());
+                                        }
+
+                                        MinecraftClient.getInstance().setScreen(new NewPage(server));
+                                    }
+                                }).horizontalSizing(Sizing.fill(47)))
+                                .gap(8)
+                                .horizontalAlignment(HorizontalAlignment.CENTER)
+                        )
+                        .gap(18)
+                        .margins(Insets.of(17))
+                ).surface(Surface.flat(EssentialColorScheme.BACKGROUND).and(Surface.outline(EssentialColorScheme.MODAL_OUTLINE)));
+
+        FlowLayout layout = Containers.verticalFlow(Sizing.fill(100), Sizing.fill(100));
+
+        layout.child(content).surface(Surface.flat(0x33000000)).horizontalAlignment(HorizontalAlignment.CENTER).verticalAlignment(VerticalAlignment.CENTER);
+
+        return layout;
+    }
+
     @Override
     protected void build(FlowLayout rootComponent) {
+        OverlayContainer<Component> overlay = Containers.overlay(Containers.verticalFlow(Sizing.fill(0), Sizing.fixed(0)));
+        overlay.zIndex(200);
+        overlay.closeOnClick(false);
+
         EssentialScrollContainer cardList = new EssentialScrollContainer(ScrollContainer.ScrollDirection.VERTICAL, Sizing.fill(100), Sizing.fill(100), new CardList(this.server, card -> {
             this.card = card;
+        }, delete -> {
+            overlay.child(generateOverlay(overlay));
+            rootComponent.child(overlay);
         }));
 
         ServerList serverList = new ServerList(this.server, server -> {
@@ -76,6 +124,9 @@ public class NewPage extends BaseOwoScreen<FlowLayout> {
 
             cardList.child(new CardList(server, card -> {
                 this.card = card;
+            }, delete -> {
+                overlay.child(generateOverlay(overlay));
+                rootComponent.child(overlay);
             }));
         });
         serverList.padding(Insets.of(10, 10, 12, 12));

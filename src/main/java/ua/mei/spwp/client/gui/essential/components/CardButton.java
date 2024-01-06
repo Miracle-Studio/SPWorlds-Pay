@@ -8,7 +8,9 @@ import net.minecraft.client.sound.*;
 import net.minecraft.sound.*;
 import net.minecraft.text.*;
 import ua.mei.spwp.api.types.*;
+import ua.mei.spwp.client.*;
 import ua.mei.spwp.client.gui.essential.*;
+import ua.mei.spwp.util.*;
 
 import java.util.function.*;
 
@@ -23,14 +25,20 @@ public class CardButton extends FlowLayout {
 
     public Consumer<DatabaseCard> onPress;
 
-    public CardButton(DatabaseCard card, Consumer<DatabaseCard> onPress) {
+    public CardButton(DatabaseCard card, Consumer<DatabaseCard> onPress, Consumer<DatabaseCard> onDelete) {
         super(Sizing.fill(100), Sizing.content(), Algorithm.VERTICAL);
 
         this.card = card;
 
         this.child(Containers.horizontalFlow(Sizing.fill(100), Sizing.content())
                 .child(Containers.verticalFlow(Sizing.content(), Sizing.content())
-                        .child(Components.label(Text.literal(card.card().name())).color(Color.ofArgb(EssentialColorScheme.MODAL_TEXT)).shadow(true))
+                        .child(Containers.horizontalFlow(Sizing.content(), Sizing.content())
+                                .child(Components.label(Text.literal(card.card().name())).color(Color.ofArgb(EssentialColorScheme.MODAL_TEXT)).shadow(true))
+                                .child(new TransparentButton(Text.literal("\uD83D\uDDD1"), EssentialColorScheme.TAB_TEXT, EssentialColorScheme.HOVERED_TAB_TEXT, 0xFFFF3333, button -> {
+                                    onDelete.accept(this.card);
+                                }))
+                                .gap(4)
+                        )
                         .child(new CardBalanceLabel(card).color(Color.ofArgb(0xFF747474)).shadow(false))
                         .gap(4)
                         .margins(Insets.top(2))

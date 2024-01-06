@@ -8,6 +8,9 @@
   "gui.spwp.title.add_sp_card": "Добавить карту СП",
   "gui.spwp.title.add_spm_card": "Добавить карту СПм",
 
+  "gui.spwp.server.sp": "СП",
+  "gui.spwp.server.spm": "СПм",
+
   "gui.spwp.title.cards": "Карты",
   "gui.spwp.title.transfer": "Переводы",
 
@@ -51,6 +54,8 @@
   "config.spwp.category.main": "Главное",
   "config.spwp.group.visual": "Внешний вид",
   "config.spwp.option.theme": "Тема",
+
+  "modal.spwp.delete_card.description": "Вы точно хотите удалить карту ",
 
   "modmenu.descriptionTranslation.spwp": "Mod that allows you to manage your SP/SPm cards directly in Minecraft"
 }

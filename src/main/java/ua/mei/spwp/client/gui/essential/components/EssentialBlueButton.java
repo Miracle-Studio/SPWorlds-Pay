@@ -38,7 +38,7 @@ public class EssentialBlueButton extends ButtonComponent {
         NinePatchTexture.draw(texture, (OwoUIDrawContext) context, this.getX(), this.getY(), this.width, this.height);
 
         TextRenderer textRenderer = MinecraftClient.getInstance().textRenderer;
-        int color = this.active ? 0xffffff : 0xa0a0a0;
+        int color = this.active ? 0xE2E2E2 : 0xa0a0a0;
 
         if (this.textShadow) {
             context.drawCenteredTextWithShadow(textRenderer, this.getMessage(), this.getX() + this.width / 2, this.getY() + (this.height - 8) / 2, color);
