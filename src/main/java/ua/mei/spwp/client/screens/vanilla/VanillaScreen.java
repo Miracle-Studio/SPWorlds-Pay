@@ -5,6 +5,7 @@ import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
 import net.fabricmc.api.*;
+import net.minecraft.client.gui.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
@@ -14,6 +15,9 @@ import org.jetbrains.annotations.*;
 public class VanillaScreen extends BaseOwoHandledScreen<FlowLayout, VanillaScreenHandler> {
     public VanillaScreen(PlayerInventory inventory) {
         super(new VanillaScreenHandler(inventory), inventory, Text.empty());
+
+        this.backgroundWidth = 176;
+        this.backgroundHeight = 176;
     }
 
     @Override

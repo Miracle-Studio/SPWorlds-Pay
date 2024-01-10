@@ -16,7 +16,7 @@ public class VanillaScreenHandler extends ScreenHandler {
 
         this.inventory = inventory;
 
-        SlotGenerator.begin(this::addSlot, 8, 89).playerInventory(inventory);
+        SlotGenerator.begin(this::addSlot, 8, 94).playerInventory(inventory);
     }
 
     @Override
