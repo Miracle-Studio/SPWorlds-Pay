@@ -3,11 +3,9 @@
   "package": "ua.mei.spwp.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "BaseComponentAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "mixins": [
-    "BaseComponentAccessor"
-  ]
+  }
 }
