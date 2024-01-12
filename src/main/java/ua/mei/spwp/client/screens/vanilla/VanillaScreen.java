@@ -4,12 +4,12 @@ import io.wispforest.owo.ui.base.*;
 import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
-import net.fabricmc.api.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
+import ua.mei.spwp.client.*;
 import ua.mei.spwp.client.screens.vanilla.components.*;
 
 import java.util.*;
@@ -51,7 +51,7 @@ public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
         }
 
         rootComponent.child(Containers.verticalFlow(Sizing.fixed(176), Sizing.fixed(176))
-                .child(Components.texture(new Identifier("spwp", "textures/gui/vanilla_screen.png"), 0, 0, 176, 176, 256, 256))
+                .child(Components.texture(new Identifier(SPWorldsPayClient.MOD_ID, "textures/gui/vanilla_screen.png"), 0, 0, 176, 176, 256, 256))
                 .child(Containers.verticalFlow(Sizing.fixed(162), Sizing.fixed(161))
                         .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(18)))
                         .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(36))

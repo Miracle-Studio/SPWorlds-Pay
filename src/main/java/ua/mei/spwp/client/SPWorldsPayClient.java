@@ -8,6 +8,8 @@ import org.lwjgl.glfw.*;
 import ua.mei.spwp.client.screens.vanilla.*;
 
 public class SPWorldsPayClient implements ClientModInitializer {
+    public static final String MOD_ID = "spwp";
+
     private static KeyBinding openScreenKeyBinding;
 
     @Override
