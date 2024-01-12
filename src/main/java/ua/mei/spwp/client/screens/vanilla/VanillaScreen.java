@@ -5,18 +5,15 @@ import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
 import net.fabricmc.api.*;
-import net.minecraft.client.gui.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.item.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
-import net.minecraft.util.collection.*;
 import org.jetbrains.annotations.*;
 import ua.mei.spwp.client.screens.vanilla.components.*;
 
 import java.util.*;
 
-@Environment(EnvType.CLIENT)
 public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
     public PlayerInventory inventory;
 
