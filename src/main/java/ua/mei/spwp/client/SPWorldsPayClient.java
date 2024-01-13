@@ -9,11 +9,13 @@ import ua.mei.spwp.client.screens.vanilla.*;
 
 public class SPWorldsPayClient implements ClientModInitializer {
     public static final String MOD_ID = "spwp";
+    public static SPWorldsPayDatabase database;
 
     private static KeyBinding openScreenKeyBinding;
 
     @Override
     public void onInitializeClient() {
+        database = new SPWorldsPayDatabase();
         openScreenKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("Ахуеть от кринжа", GLFW.GLFW_KEY_Z, "SPWorlds Pay"));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
