@@ -39,14 +39,14 @@ public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
         FlowLayout hotbarLayout = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(18));
 
         for (ItemStack stack : hotbar) {
-            hotbarLayout.child(new FakeSlot(stack));
+            hotbarLayout.child(new FakeItem(stack));
         }
 
         GridLayout inventoryLayout = Containers.grid(Sizing.fill(100), Sizing.fixed(54), 3, 9);
 
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
-                inventoryLayout.child(new FakeSlot(inventory.get((row * 9) + col)), row, col);
+                inventoryLayout.child(new FakeItem(inventory.get((row * 9) + col)), row, col);
             }
         }
 
