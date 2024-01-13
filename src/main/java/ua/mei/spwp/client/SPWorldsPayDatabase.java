@@ -22,14 +22,14 @@ public class SPWorldsPayDatabase {
                 .setAutoIncrement()
                 .addColumn("name", SQLDataType.STRING)
                 .addColumn("texture", SQLDataType.IDENTIFIER)
-                .addColumn("id", SQLDataType.STRING)
+                .addColumn("cardId", SQLDataType.STRING)
                 .addColumn("token", SQLDataType.STRING)
                 .finish();
         this.spmCards = this.database.createTable(SPWorldsPayClient.MOD_ID, "spmCards")
                 .setAutoIncrement()
                 .addColumn("name", SQLDataType.STRING)
                 .addColumn("texture", SQLDataType.IDENTIFIER)
-                .addColumn("id", SQLDataType.STRING)
+                .addColumn("cardId", SQLDataType.STRING)
                 .addColumn("token", SQLDataType.STRING)
                 .finish();
     }
@@ -42,7 +42,7 @@ public class SPWorldsPayDatabase {
         };
 
         return dataContainers.stream()
-                .map(data -> new DatabaseCard(data.getIdAsInt(), data.getString("name"), data.getIdentifier("texture"), data.getString("id"), data.getString("token")))
+                .map(data -> new DatabaseCard(data.getIdAsInt(), data.getString("name"), data.getIdentifier("texture"), data.getString("cardId"), data.getString("token")))
                 .collect(Collectors.toList());
     }
     public List<DatabaseCard> getCards() {
