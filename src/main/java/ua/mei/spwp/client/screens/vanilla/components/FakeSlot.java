@@ -4,6 +4,9 @@ import io.wispforest.owo.ui.component.*;;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.client.*;
 import net.minecraft.item.*;
+import net.minecraft.text.*;
+
+import java.util.*;
 
 public class FakeSlot extends ItemComponent {
     public FakeSlot(ItemStack stack) {
@@ -11,6 +14,15 @@ public class FakeSlot extends ItemComponent {
 
         this.setTooltipFromStack(true);
         this.sizing(Sizing.fixed(18));
+    }
+
+    public FakeSlot(ItemStack stack, List<Text> tooltip) {
+        super(stack);
+
+        this.setTooltipFromStack(true);
+        this.sizing(Sizing.fixed(18));
+
+        this.tooltip(tooltip);
     }
 
     @Override

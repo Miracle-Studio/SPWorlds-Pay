@@ -21,7 +21,7 @@ public class SPWorldsPayClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (openScreenKeyBinding.wasPressed()) {
                 if (client.player != null) {
-                    client.setScreen(new VanillaAddCardScreen(client.player.getInventory()));
+                    client.setScreen(new VanillaAddCardScreen(client.player.getInventory(), "лол", "", ""));
                 }
             }
         });
