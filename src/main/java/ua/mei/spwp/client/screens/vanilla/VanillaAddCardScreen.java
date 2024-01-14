@@ -35,13 +35,13 @@ public class VanillaAddCardScreen extends BaseOwoScreen<FlowLayout> {
                 .child(Components.texture(new Identifier(SPWorldsPayClient.MOD_ID, "textures/gui/vanilla/add_card.png"), 0, 0, 176, 176, 256, 256))
                 .child(Containers.verticalFlow(Sizing.fixed(162), Sizing.fixed(107))
                         .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(18))
-                                .child(new TexturedButton("cancel.png", 36, 18, btn -> {
+                                .child(new InvisibleButton(36, 18, btn -> {
 
-                                }).tooltip(Text.literal("Cancel").formatted(Formatting.DARK_RED)))
+                                }).tooltip(Text.literal("Отмена").styled(style -> style.withColor(0xD92625))))
                                 .child(new FakeSlot(new ItemStack(Items.DIAMOND)))
-                                .child(new TexturedButton("confirm.png", 36, 18, btn -> {
+                                .child(new InvisibleButton(36, 18, btn -> {
 
-                                }).tooltip(Text.literal("Purchase").formatted(Formatting.DARK_GREEN)))
+                                }).tooltip(Text.literal("Добавить").styled(style -> style.withColor(0x83CA16))))
                                 .gap(18)
                                 .margins(Insets.horizontal(18))
                         )

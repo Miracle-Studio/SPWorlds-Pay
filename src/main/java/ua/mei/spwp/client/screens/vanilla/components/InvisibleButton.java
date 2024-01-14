@@ -8,17 +8,12 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.gui.tooltip.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
-import ua.mei.spwp.client.*;
 
 import java.util.function.*;
 
-public class TexturedButton extends ButtonComponent {
-    public final String texturePath;
-
-    public TexturedButton(String texturePath, int width, int height, Consumer<ButtonComponent> onPress) {
+public class InvisibleButton extends ButtonComponent {
+    public InvisibleButton(int width, int height, Consumer<ButtonComponent> onPress) {
         super(Text.literal(""), onPress);
-
-        this.texturePath = texturePath;
 
         this.horizontalSizing(Sizing.fixed(width));
         this.verticalSizing(Sizing.fixed(height));
@@ -26,7 +21,7 @@ public class TexturedButton extends ButtonComponent {
 
     @Override
     public void drawTexture(DrawContext context, Identifier texture, int x, int y, int u, int v, int hoveredVOffset, int width, int height, int textureWidth, int textureHeight) {
-        context.drawTexture(new Identifier(SPWorldsPayClient.MOD_ID, "textures/gui/vanilla/button/" + this.texturePath), x, y, 0, 0, 36, 18, 36, 18);
+        // Нихуя не делаем
     }
 
     @Override
