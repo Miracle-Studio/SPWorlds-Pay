@@ -33,7 +33,7 @@ dependencies {
     modImplementation include("io.wispforest:owo-lib:${project.owo_version}")
     modImplementation include("maven.modrinth:sqlib:${project.sqlib_version}")
     modImplementation include("net.kyori:adventure-platform-fabric:${project.kyori_version}")
-    modImplementation include("dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}")
+    modImplementation "dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}"
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 

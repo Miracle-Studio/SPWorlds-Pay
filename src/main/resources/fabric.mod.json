@@ -35,6 +35,6 @@
   "depends": {
     "fabric": "*",
     "minecraft": ">=1.20",
-    "yacl": "3.2.1"
+    "yet_another_config_lib_v3": ">=3.2.1+1.20"
   }
 }

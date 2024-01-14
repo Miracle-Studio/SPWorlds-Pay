@@ -5,20 +5,17 @@ import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.entity.player.*;
-import net.minecraft.item.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
 import ua.mei.spwp.client.*;
 import ua.mei.spwp.client.screens.vanilla.components.*;
 
-import java.util.*;
-
 public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
-    public PlayerInventory inventory;
+    public PlayerInventory playerInventory;
 
-    public VanillaScreen(PlayerInventory inventory) {
-        this.inventory = inventory;
+    public VanillaScreen(PlayerInventory playerInventory) {
+        this.playerInventory = playerInventory;
     }
 
     @Override
@@ -33,23 +30,6 @@ public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
 
     @Override
     protected void build(FlowLayout rootComponent) {
-        List<ItemStack> hotbar = this.inventory.main.subList(0, this.inventory.main.size() - 27);
-        List<ItemStack> inventory = this.inventory.main.subList(9, this.inventory.main.size());
-
-        FlowLayout hotbarLayout = Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(18));
-
-        for (ItemStack stack : hotbar) {
-            hotbarLayout.child(new FakeItem(stack));
-        }
-
-        GridLayout inventoryLayout = Containers.grid(Sizing.fill(100), Sizing.fixed(54), 3, 9);
-
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 9; col++) {
-                inventoryLayout.child(new FakeItem(inventory.get((row * 9) + col)), row, col);
-            }
-        }
-
         rootComponent.child(Containers.verticalFlow(Sizing.fixed(176), Sizing.fixed(176))
                 .child(Components.texture(new Identifier(SPWorldsPayClient.MOD_ID, "textures/gui/vanilla_screen.png"), 0, 0, 176, 176, 256, 256))
                 .child(Containers.verticalFlow(Sizing.fixed(162), Sizing.fixed(161))
@@ -63,8 +43,7 @@ public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
                                 .child(Components.label(Text.translatable("container.inventory")).shadow(false).color(Color.ofArgb(0xFF3F3F3F)).margins(Insets.of(1, 0, 1, 0)))
                                 .verticalAlignment(VerticalAlignment.CENTER)
                         )
-                        .child(inventoryLayout)
-                        .child(hotbarLayout.margins(Insets.top(4)))
+                        .child(new FakeInventory(this.playerInventory))
                         .positioning(Positioning.relative(50, 50))
                 )
         );
