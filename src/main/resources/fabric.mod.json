@@ -34,6 +34,7 @@
   ],
   "depends": {
     "fabric": "*",
-    "minecraft": ">=1.20"
+    "minecraft": ">=1.20",
+    "yacl": "3.2.1"
   }
 }

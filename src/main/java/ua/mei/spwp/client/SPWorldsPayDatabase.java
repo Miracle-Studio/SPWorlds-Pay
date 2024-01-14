@@ -4,6 +4,7 @@ import me.mrnavastar.sqlib.*;
 import me.mrnavastar.sqlib.database.*;
 import me.mrnavastar.sqlib.sql.*;
 import net.fabricmc.loader.api.*;
+import net.minecraft.util.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.util.*;
 
@@ -11,21 +12,20 @@ import java.util.*;
 import java.util.stream.*;
 
 public class SPWorldsPayDatabase {
-    private final Database database;
     private final Table spCards;
     private final Table spmCards;
 
     public SPWorldsPayDatabase() {
-        this.database = new SQLiteDatabase("spwp-cards", FabricLoader.getInstance().getConfigDir().toString());
+        Database database = new SQLiteDatabase("spwp-cards", FabricLoader.getInstance().getConfigDir().toString());
 
-        this.spCards = this.database.createTable(SPWorldsPayClient.MOD_ID, "spCards")
+        this.spCards = database.createTable(SPWorldsPayClient.MOD_ID, "spCards")
                 .setAutoIncrement()
                 .addColumn("name", SQLDataType.STRING)
                 .addColumn("texture", SQLDataType.IDENTIFIER)
                 .addColumn("cardId", SQLDataType.STRING)
                 .addColumn("token", SQLDataType.STRING)
                 .finish();
-        this.spmCards = this.database.createTable(SPWorldsPayClient.MOD_ID, "spmCards")
+        this.spmCards = database.createTable(SPWorldsPayClient.MOD_ID, "spmCards")
                 .setAutoIncrement()
                 .addColumn("name", SQLDataType.STRING)
                 .addColumn("texture", SQLDataType.IDENTIFIER)
@@ -38,7 +38,6 @@ public class SPWorldsPayDatabase {
         List<DataContainer> dataContainers = switch(server) {
             case SP -> spCards.getDataContainers();
             case SPm -> spmCards.getDataContainers();
-            case OTHER -> Collections.emptyList();
         };
 
         return dataContainers.stream()
@@ -48,6 +47,58 @@ public class SPWorldsPayDatabase {
     public List<DatabaseCard> getCards() {
         Server server = Server.getServer();
 
-        return (server != Server.OTHER) ? getCards(server) : Collections.emptyList();
+        return (server != null) ? getCards(server) : Collections.emptyList();
+    }
+
+    public DatabaseCard getCard(Server server, int id) {
+        DataContainer data = switch(server) {
+            case SP -> spCards.getOrCreateDataContainer(id);
+            case SPm -> spmCards.getOrCreateDataContainer(id);
+        };
+
+        return (data != null) ? new DatabaseCard(data.getIdAsInt(), data.getString("name"), data.getIdentifier("texture"), data.getString("cardId"), data.getString("token")) : null;
+    }
+
+    public DatabaseCard getCard(int id) {
+        Server server = Server.getServer();
+
+        return (server != null) ? getCard(server, id) : null;
+    }
+
+    public void addCard(Server server, String name, Identifier texture, String id, String token) {
+        switch(server) {
+            case SP -> spCards.beginTransaction();
+            case SPm -> spmCards.beginTransaction();
+        }
+
+        DataContainer data = switch(server) {
+            case SP -> spCards.createDataContainerAutoID();
+            case SPm -> spmCards.createDataContainerAutoID();
+        };
+        data.put("name", name);
+        data.put("texture", texture);
+        data.put("cardId", id);
+        data.put("token", token);
+
+        switch(server) {
+            case SP -> spCards.endTransaction();
+            case SPm -> spmCards.endTransaction();
+        }
+    }
+
+    public void addCard(String name, Identifier texture, String id, String token) {
+        Server server = Server.getServer();
+
+        if (server != null) {
+            addCard(server, name, texture, id, token);
+        }
+    }
+
+    public void addCard(String name, String id, String token) {
+        Server server = Server.getServer();
+
+        if (server != null) {
+            addCard(server, name, new Identifier("minecraft", "diamond"), id, token);
+        }
     }
 }

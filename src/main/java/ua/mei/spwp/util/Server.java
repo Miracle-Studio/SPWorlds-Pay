@@ -7,8 +7,7 @@ import java.util.*;
 
 public enum Server {
     SP("sp.spworlds.ru", "sp.spworlds.org"),
-    SPm("spm.spworlds.ru", "spm.spworlds.org"),
-    OTHER("");
+    SPm("spm.spworlds.ru", "spm.spworlds.org");
 
     public final List<String> addresses;
 
@@ -23,6 +22,6 @@ public enum Server {
         return (serverInfo != null) ? Arrays.stream(values())
                 .filter(server -> server.addresses.contains(serverInfo.address))
                 .findFirst()
-                .orElse(Server.OTHER) : Server.OTHER;
+                .orElse(null) : null;
     }
 }
