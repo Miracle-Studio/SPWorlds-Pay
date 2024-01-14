@@ -5,8 +5,8 @@ import io.wispforest.owo.ui.core.*;
 import net.minecraft.client.*;
 import net.minecraft.item.*;
 
-public class FakeItem extends ItemComponent {
-    public FakeItem(ItemStack stack) {
+public class FakeSlot extends ItemComponent {
+    public FakeSlot(ItemStack stack) {
         super(stack);
 
         this.setTooltipFromStack(true);
