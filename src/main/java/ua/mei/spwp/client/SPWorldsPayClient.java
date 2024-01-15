@@ -2,6 +2,7 @@ package ua.mei.spwp.client;
 
 import com.google.gson.*;
 import net.fabricmc.api.*;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.*;
 import net.fabricmc.fabric.api.client.keybinding.v1.*;
 import net.fabricmc.fabric.api.client.message.v1.*;
 import net.kyori.adventure.text.serializer.gson.*;
@@ -11,8 +12,11 @@ import org.lwjgl.glfw.*;
 import ua.mei.spwp.client.screens.or.*;
 import ua.mei.spwp.util.*;
 
+import java.util.concurrent.*;
+
 public class SPWorldsPayClient implements ClientModInitializer {
     public static final String MOD_ID = "spwp";
+    public static final AsyncTasksService tasks = new AsyncTasksService(Executors.newCachedThreadPool());
     public static SPWorldsPayDatabase database;
 
     private static KeyBinding openScreenKeyBinding;
@@ -21,6 +25,24 @@ public class SPWorldsPayClient implements ClientModInitializer {
     public void onInitializeClient() {
         database = new SPWorldsPayDatabase();
         openScreenKeyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding("Ахуеть от кринжа", GLFW.GLFW_KEY_Z, "SPWorlds Pay"));
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            try {
+                tasks.updateTasks();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            tasks.removeDone();
+        });
+
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            while (openScreenKeyBinding.wasPressed()) {
+                if (client.player != null) {
+                    client.setScreen(new ORScreen(client.player));
+                }
+            }
+        });
 
         ClientReceiveMessageEvents.GAME.register((message, overlay) -> {
             String messageContent = message.getString();

@@ -34,4 +34,8 @@ public class FakeSlot extends ItemComponent {
             context.fill(this.x + 1, this.y + 1, this.x + 17, this.y + 17, 200, 0x80FFFFFF);
         }
     }
+
+    public void notifyParent() {
+        this.notifyParentIfMounted();
+    }
 }
