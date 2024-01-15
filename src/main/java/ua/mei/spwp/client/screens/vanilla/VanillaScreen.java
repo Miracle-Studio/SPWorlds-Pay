@@ -4,6 +4,9 @@ import io.wispforest.owo.ui.base.*;
 import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
+import net.fabricmc.api.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.screen.ingame.*;
 import net.minecraft.entity.player.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
@@ -11,11 +14,22 @@ import org.jetbrains.annotations.*;
 import ua.mei.spwp.client.*;
 import ua.mei.spwp.client.screens.vanilla.components.*;
 
-public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
+@Environment(EnvType.CLIENT)
+public class VanillaScreen extends AbstractInventoryScreen<VanillaScreenHandler> {
     public PlayerInventory playerInventory;
 
     public VanillaScreen(PlayerInventory playerInventory) {
+        super(new VanillaScreenHandler(playerInventory), playerInventory, Text.empty());
+
         this.playerInventory = playerInventory;
+
+        this.backgroundWidth = 176;
+        this.backgroundHeight = 176;
+    }
+
+    @Override
+    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
+        context.drawTexture(new Identifier(SPWorldsPayClient.MOD_ID, "textures/gui/vanilla/main.png"), this.x, this.y, 0, 0, this.backgroundWidth, this.backgroundHeight);
     }
 
     @Override
@@ -23,7 +37,7 @@ public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
         return false;
     }
 
-    @Override
+    /* @Override
     protected @NotNull OwoUIAdapter<FlowLayout> createAdapter() {
         return OwoUIAdapter.create(this, Containers::verticalFlow);
     }
@@ -46,5 +60,5 @@ public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
         rootComponent.horizontalAlignment(HorizontalAlignment.CENTER);
         rootComponent.verticalAlignment(VerticalAlignment.CENTER);
         rootComponent.surface(Surface.VANILLA_TRANSLUCENT);
-    }
+    } */
 }
