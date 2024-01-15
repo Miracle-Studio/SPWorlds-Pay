@@ -1,6 +1,5 @@
-package ua.mei.spwp.client.screens.vanilla.components;
+package ua.mei.spwp.client.screens.or.components;
 
-import io.wispforest.owo.mixin.ui.access.*;
 import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.client.*;
@@ -26,7 +25,7 @@ public class InvisibleButton extends ButtonComponent {
 
     @Override
     public void renderButton(DrawContext context, int mouseX, int mouseY, float delta) {
-        Tooltip tooltip = ((ClickableWidgetAccessor) this).owo$getTooltip();
+        Tooltip tooltip = this.getTooltip();
 
         if (this.hovered && tooltip != null) {
             context.drawTooltip(MinecraftClient.getInstance().textRenderer, tooltip.getLines(MinecraftClient.getInstance()), HoveredTooltipPositioner.INSTANCE, mouseX, mouseY);

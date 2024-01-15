@@ -1,21 +1,20 @@
-package ua.mei.spwp.client.screens.vanilla;
+package ua.mei.spwp.client.screens.or;
 
 import io.wispforest.owo.ui.base.*;
 import io.wispforest.owo.ui.component.*;
 import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.text.*;
+import net.minecraft.client.network.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
 import ua.mei.spwp.client.*;
-import ua.mei.spwp.client.screens.vanilla.components.*;
+import ua.mei.spwp.client.screens.or.components.*;
 
-public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
-    public PlayerInventory playerInventory;
+public class ORScreen extends BaseOwoScreen<FlowLayout> {
+    public ClientPlayerEntity player;
 
-    public VanillaScreen(PlayerInventory playerInventory) {
-        this.playerInventory = playerInventory;
+    public ORScreen(ClientPlayerEntity player) {
+        this.player = player;
     }
 
     @Override
@@ -31,7 +30,7 @@ public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
     @Override
     protected void build(FlowLayout rootComponent) {
         rootComponent.child(Containers.verticalFlow(Sizing.fixed(176), Sizing.fixed(176))
-                .child(Components.texture(new Identifier(SPWorldsPayClient.MOD_ID, "textures/gui/vanilla/main.png"), 0, 0, 176, 176, 256, 256))
+                .child(Components.texture(new Identifier(SPWorldsPayClient.MOD_ID, "textures/gui/or/main.png"), 0, 0, 176, 176, 256, 256))
                 .child(Containers.verticalFlow(Sizing.fixed(162), Sizing.fixed(161))
                         .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(18)))
                         .child(Containers.verticalFlow(Sizing.fill(100), Sizing.fixed(36))
@@ -39,7 +38,7 @@ public class VanillaScreen extends BaseOwoScreen<FlowLayout> {
                                 .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(18)))
                         )
                         .child(Containers.horizontalFlow(Sizing.fill(100), Sizing.fixed(18)))
-                        .child(new FakeInventory(this.playerInventory))
+                        .child(new FakeInventory(this.player.getInventory()))
                         .positioning(Positioning.relative(50, 50))
                 )
         );

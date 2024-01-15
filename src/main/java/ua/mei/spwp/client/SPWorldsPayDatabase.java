@@ -12,20 +12,21 @@ import java.util.*;
 import java.util.stream.*;
 
 public class SPWorldsPayDatabase {
+    private final Database database;
     private final Table spCards;
     private final Table spmCards;
 
     public SPWorldsPayDatabase() {
-        Database database = new SQLiteDatabase("spwp-cards", FabricLoader.getInstance().getConfigDir().toString());
+        this.database = new SQLiteDatabase("spwp-cards", FabricLoader.getInstance().getConfigDir().toString());
 
-        this.spCards = database.createTable(SPWorldsPayClient.MOD_ID, "spCards")
+        this.spCards = this.database.createTable(SPWorldsPayClient.MOD_ID, "spCards")
                 .setAutoIncrement()
                 .addColumn("name", SQLDataType.STRING)
                 .addColumn("texture", SQLDataType.IDENTIFIER)
                 .addColumn("cardId", SQLDataType.STRING)
                 .addColumn("token", SQLDataType.STRING)
                 .finish();
-        this.spmCards = database.createTable(SPWorldsPayClient.MOD_ID, "spmCards")
+        this.spmCards = this.database.createTable(SPWorldsPayClient.MOD_ID, "spmCards")
                 .setAutoIncrement()
                 .addColumn("name", SQLDataType.STRING)
                 .addColumn("texture", SQLDataType.IDENTIFIER)

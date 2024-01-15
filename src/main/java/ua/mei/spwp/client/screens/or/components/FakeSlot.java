@@ -1,4 +1,4 @@
-package ua.mei.spwp.client.screens.vanilla.components;
+package ua.mei.spwp.client.screens.or.components;
 
 import io.wispforest.owo.ui.component.*;;
 import io.wispforest.owo.ui.core.*;
