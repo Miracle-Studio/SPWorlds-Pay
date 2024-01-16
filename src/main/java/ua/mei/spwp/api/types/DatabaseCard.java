@@ -32,7 +32,6 @@ public record DatabaseCard(int rowid, String name, Identifier texture, String id
 
             tooltips.set(1, Text.literal("• Баланс: " + card.balance()).styled(style -> style.withColor(ORColorScheme.GRAY)));
             slot.tooltip(tooltips);
-            slot.notifyParent();
         }, exception -> {
 
         });
