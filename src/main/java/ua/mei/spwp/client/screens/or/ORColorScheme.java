@@ -7,4 +7,5 @@ public interface ORColorScheme {
     int GREEN = 0x83CA16;
     int BLUE = 0x3B8BC1;
     int GOLD = 0xF19C0B;
+    int YELLOW = 0xFBFB54;
 }

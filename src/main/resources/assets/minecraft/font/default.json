@@ -1,0 +1,11 @@
+{
+  "providers": [
+    {
+      "type":"bitmap",
+      "file":"spwp:font/error_green.png",
+      "ascent":7,
+      "height":7,
+      "chars":["ꑠ"]
+    }
+  ]
+}

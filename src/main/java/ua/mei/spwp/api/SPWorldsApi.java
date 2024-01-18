@@ -11,13 +11,13 @@ public class SPWorldsApi {
     private static final Gson gson = new Gson();
     private static final HttpClient httpClient = HttpClient.newHttpClient();
 
-    public static Card requestBalance(DatabaseCard card) {
+    public static Integer requestBalance(Card card) {
         JsonObject json = request(card, "card", "GET", null);
 
-        return (json != null && json.has("balance")) ? new Card(card.rowid(), card.name(), card.texture(), card.id(), card.token(), json.get("balance").getAsInt()) : null;
+        return (json != null && json.has("balance")) ? json.get("balance").getAsInt() : null;
     }
 
-    public static JsonObject request(DatabaseCard card, String endpoint, String method, String requestBody) {
+    public static JsonObject request(Card card, String endpoint, String method, String requestBody) {
         try {
             HttpRequest.Builder requestBuilder = HttpRequest.newBuilder()
                     .uri(URI.create(API_URL + endpoint))

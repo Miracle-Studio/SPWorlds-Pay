@@ -6,7 +6,6 @@ import io.wispforest.owo.ui.container.*;
 import io.wispforest.owo.ui.core.*;
 import net.minecraft.client.*;
 import net.minecraft.client.network.*;
-import net.minecraft.item.*;
 import net.minecraft.text.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
@@ -50,11 +49,11 @@ public class ORAddCardScreen extends BaseOwoScreen<FlowLayout> {
                                 .child(new InvisibleButton(36, 18, btn -> {
                                     MinecraftClient.getInstance().setScreen(null);
                                 }).tooltip(Text.literal("Отмена").styled(style -> style.withColor(ORColorScheme.RED))))
-                                .child(new DatabaseCard(0, this.name, new Identifier("minecraft", "diamond"), this.id, this.token).asSlot())
+                                .child(new Card(0, this.name, new Identifier("minecraft", "diamond"), this.id, this.token).asSlot())
                                 .child(new InvisibleButton(36, 18, btn -> {
                                     SPWorldsPayClient.database.addCard(this.name, this.id, this.token);
                                     MinecraftClient.getInstance().setScreen(null);
-                                    this.player.sendMessage(Text.literal("\nКарта " + this.name + " успешно добавлена!\n").styled(style -> style.withColor(ORColorScheme.GREEN)));
+                                    this.player.sendMessage(Text.literal("ꑠ ").append(Text.literal("Карта ").append(Text.literal(this.name).styled(style -> style.withColor(ORColorScheme.YELLOW))).append(Text.literal(" успешно добавлена!")).styled(style -> style.withColor(ORColorScheme.GREEN))));
                                 }).tooltip(List.of(
                                         Text.literal("Добавить").styled(style -> style.withColor(ORColorScheme.GREEN)),
                                         Text.literal("Карта: ").formatted(Formatting.GRAY).append(Text.literal(this.name).formatted(Formatting.WHITE))
