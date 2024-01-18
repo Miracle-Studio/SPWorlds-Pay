@@ -47,7 +47,7 @@ public class Card {
         FakeSlot slot = new FakeSlot(Registries.ITEM.get(this.texture).getDefaultStack(), tooltips);
 
         SPWorldsPayClient.tasks.addTask(this::requestBalance, result -> {
-            tooltips.set(1, Text.literal("• Баланс: ").styled(style -> style.withColor(ORColorScheme.GRAY)).append(Text.literal(this.balance == null ? "Ошибка!" : String.valueOf(this.balance)).styled(style -> style.withColor(this.balance == null ? ORColorScheme.RED : ORColorScheme.GRAY))));
+            tooltips.set(1, Text.literal("• Баланс: ").styled(style -> style.withColor(ORColorScheme.GRAY)).append(Text.literal((this.balance == null) ? "Ошибка!" : String.valueOf(this.balance)).styled(style -> style.withColor((this.balance == null) ? ORColorScheme.RED : ORColorScheme.GRAY))));
             slot.tooltip(tooltips);
         }, exception -> {
 

@@ -38,8 +38,12 @@ public class SPWorldsPayClient implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (openScreenKeyBinding.wasPressed()) {
-                if (client.player != null) {
-                    client.setScreen(new ORScreen(client.player));
+                Server server = Server.getServer();
+
+                if (server != null) {
+                    if (client.player != null) {
+                        client.setScreen(new ORScreen(client.player));
+                    }
                 }
             }
         });
