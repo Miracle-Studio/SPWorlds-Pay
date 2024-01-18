@@ -58,7 +58,6 @@ public class SPWorldsPayDatabase {
 
         return (data != null) ? new Card(data.getIdAsInt(), data.getString("name"), data.getIdentifier("texture"), data.getString("cardId"), data.getString("token"), server) : null;
     }
-
     public Card getCard(int id) {
         Server server = Server.getServer();
 
@@ -85,7 +84,6 @@ public class SPWorldsPayDatabase {
             case SPm -> spmCards.endTransaction();
         }
     }
-
     public void addCard(String name, String id, String token) {
         Server server = Server.getServer();
 
