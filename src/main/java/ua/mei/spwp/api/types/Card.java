@@ -42,7 +42,7 @@ public class Card {
         List<Text> tooltips = new ArrayList<>();
         tooltips.add(Text.literal(this.name).styled(style -> style.withColor(ORColorScheme.GRAY)));
         tooltips.add(Text.literal("• Баланс: ").styled(style -> style.withColor(ORColorScheme.GRAY)).append(Text.literal("загрузка...").styled(style -> style.withColor(ORColorScheme.DARK_GRAY))));
-        tooltips.add(Text.literal("• Сервер: " + this.server.name()));
+        tooltips.add(Text.literal("• Сервер: " + this.server.name()).styled(style -> style.withColor(ORColorScheme.GRAY)));
 
         FakeSlot slot = new FakeSlot(Registries.ITEM.get(this.texture).getDefaultStack(), tooltips);
 
