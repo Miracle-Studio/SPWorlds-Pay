@@ -41,7 +41,7 @@ public class SPWorldsPayDatabase {
         };
 
         return dataContainers.stream()
-                .map(data -> new Card(data.getIdAsInt(), data.getString("name"), data.getIdentifier("texture"), data.getString("cardId"), data.getString("token")))
+                .map(data -> new Card(data.getIdAsInt(), data.getString("name"), data.getIdentifier("texture"), data.getString("cardId"), data.getString("token"), server))
                 .collect(Collectors.toList());
     }
     public List<Card> getCards() {
@@ -56,7 +56,7 @@ public class SPWorldsPayDatabase {
             case SPm -> spmCards.getOrCreateDataContainer(id);
         };
 
-        return (data != null) ? new Card(data.getIdAsInt(), data.getString("name"), data.getIdentifier("texture"), data.getString("cardId"), data.getString("token")) : null;
+        return (data != null) ? new Card(data.getIdAsInt(), data.getString("name"), data.getIdentifier("texture"), data.getString("cardId"), data.getString("token"), server) : null;
     }
 
     public Card getCard(int id) {

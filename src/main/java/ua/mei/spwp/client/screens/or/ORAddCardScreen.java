@@ -12,6 +12,7 @@ import org.jetbrains.annotations.*;
 import ua.mei.spwp.api.types.*;
 import ua.mei.spwp.client.*;
 import ua.mei.spwp.client.screens.or.components.*;
+import ua.mei.spwp.util.*;
 
 import java.util.*;
 
@@ -49,7 +50,7 @@ public class ORAddCardScreen extends BaseOwoScreen<FlowLayout> {
                                 .child(new InvisibleButton(36, 18, btn -> {
                                     MinecraftClient.getInstance().setScreen(null);
                                 }).tooltip(Text.literal("Отмена").styled(style -> style.withColor(ORColorScheme.RED))))
-                                .child(new Card(0, this.name, new Identifier("minecraft", "diamond"), this.id, this.token).asSlot())
+                                .child(new Card(0, this.name, new Identifier("minecraft", "diamond"), this.id, this.token, Server.getServer()).asSlot())
                                 .child(new InvisibleButton(36, 18, btn -> {
                                     SPWorldsPayClient.database.addCard(this.name, this.id, this.token);
                                     MinecraftClient.getInstance().setScreen(null);
